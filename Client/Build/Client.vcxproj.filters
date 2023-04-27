@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Global">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{43b75ebd-8bdd-4e19-8a85-80c567ae68a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{96fdf935-0e4c-401d-aa0e-2484675f9e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX11">
+      <UniqueIdentifier>{ffaa3fef-af9f-438e-b759-61a6cbbb382d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Source\main.cpp" />
+    <ClCompile Include="..\Source\pch.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Global\GlobalInstance.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Window\Window.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Application.cpp" />
+    <ClCompile Include="..\Source\Common\Input.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DirectX11\D3D.cpp">
+      <Filter>DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DirectX11\Graphics.cpp">
+      <Filter>DirectX11</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Source\Common\Define.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\pch.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Core.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Global\GlobalInstance.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Window\Window.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Global\Log.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Application.h" />
+    <ClInclude Include="..\Source\Common\Input.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\DirectX11\D3D.h">
+      <Filter>DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\DirectX11\Graphics.h">
+      <Filter>DirectX11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Global\Exception.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
