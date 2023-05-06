@@ -123,8 +123,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../PlugIn/DirectXTex;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>DirectXTex.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -152,15 +152,18 @@
     <ClCompile Include="..\Source\DirectX11\D3D.cpp" />
     <ClCompile Include="..\Source\DirectX11\Graphics.cpp" />
     <ClCompile Include="..\Source\DirectX11\Model.cpp" />
+    <ClCompile Include="..\Source\DirectX11\TextureClass.cpp" />
     <ClCompile Include="..\Source\Global\GlobalInstance.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\Source\Shaders\ColorShader.cpp" />
+    <ClCompile Include="..\Source\Shaders\TextureShader.cpp" />
     <ClCompile Include="..\Source\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\PlugIn\DirectXTex\DirectXTex.h" />
     <ClInclude Include="..\Source\Application.h" />
     <ClInclude Include="..\Source\Common\Define.h" />
     <ClInclude Include="..\Source\Common\Input.h" />
@@ -169,6 +172,7 @@
     <ClInclude Include="..\Source\DirectX11\D3D.h" />
     <ClInclude Include="..\Source\DirectX11\Graphics.h" />
     <ClInclude Include="..\Source\DirectX11\Model.h" />
+    <ClInclude Include="..\Source\DirectX11\TextureClass.h" />
     <ClInclude Include="..\Source\Global\Exception.h" />
     <ClInclude Include="..\Source\Global\GlobalInstance.h" />
     <ClInclude Include="..\Source\Global\Log.h" />
@@ -176,6 +180,7 @@
     <ClInclude Include="..\Source\Math\Vector.h" />
     <ClInclude Include="..\Source\pch.h" />
     <ClInclude Include="..\Source\Shaders\ColorShader.h" />
+    <ClInclude Include="..\Source\Shaders\TextureShader.h" />
     <ClInclude Include="..\Source\Window\Window.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -185,6 +190,10 @@
   <ItemGroup>
     <FxCompile Include="..\Source\Shaders\Color.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ColorVertexShader</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\Source\Shaders\Texture.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TextureVertexShader</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
   </ItemGroup>

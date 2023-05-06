@@ -2,6 +2,8 @@
 
 #include "Common/Define.h"
 
+#include "DirectXTex/DirectXTex.h"
+
 #include "Math/Vector.h"
 #include "Math/Matrix.h"
 

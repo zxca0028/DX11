@@ -8,7 +8,7 @@ namespace CLIENT
 		InitShader(device, hWnd, L"Color.hlsl");
 	}
 
-	void CLIENT::ColorShader::Render(ID3D11DeviceContext* context, i32 indexCount, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projMatrix)
+	void CLIENT::ColorShader::Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix)
 	{
 		SetShaderParameters(context, worldMatrix, viewMatrix, projMatrix);
 
@@ -72,21 +72,17 @@ namespace CLIENT
 		}
 	}
 
-	void CLIENT::ColorShader::SetShaderParameters(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projMatrix)
+	void CLIENT::ColorShader::SetShaderParameters(ID3D11DeviceContext* context, matrix worldMatrix, matrix viewMatrix, matrix projMatrix)
 	{
-		worldMatrix = XMMatrixTranspose(worldMatrix);
-		viewMatrix  = XMMatrixTranspose(viewMatrix);
-		projMatrix  = XMMatrixTranspose(projMatrix);
-
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
 
 		ThrowIfFailed(context->Map(mMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 
 		MatrixBufferType* dataPtr = (MatrixBufferType*)mappedResource.pData;
 
-		dataPtr->worldMatrix = worldMatrix;
-		dataPtr->viewMatrix  = viewMatrix;
-		dataPtr->projMatrix  = projMatrix;
+		dataPtr->worldMatrix = matrix::Transpose(worldMatrix);
+		dataPtr->viewMatrix  = matrix::Transpose(viewMatrix);
+		dataPtr->projMatrix  = matrix::Transpose(projMatrix);
 
 		context->Unmap(mMatrixBuffer, 0);
 

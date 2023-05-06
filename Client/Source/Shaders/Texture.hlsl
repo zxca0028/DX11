@@ -1,5 +1,7 @@
 
 
+Texture2D shaderTexture;
+SamplerState SampleType;
 
 cbuffer MatrixBuffer
 {
@@ -11,16 +13,16 @@ cbuffer MatrixBuffer
 struct VertexInputType
 {
 	float4 position : POSITION;
-	float4 color    : COLOR;
+	float2 tex      : TEXCOORD0;
 };
 
 struct PixelInputType
 {
 	float4 position : SV_POSITION;
-	float4 color    : COLOR;
+	float2 tex      : TEXCOORD;
 };
 
-PixelInputType ColorVertexShader(VertexInputType input)
+PixelInputType TextureVertexShader(VertexInputType input)
 {
 	PixelInputType output;
 
@@ -30,12 +32,16 @@ PixelInputType ColorVertexShader(VertexInputType input)
 	output.position = mul(output.position, viewMatrix);
 	output.position = mul(output.position, projMatrix);
 
-	output.color = input.color;
+	output.tex = input.tex;
 
 	return output;
 }
 
-float4 ColorPixelShader(PixelInputType input) : SV_TARGET
+float4 TexturePixelShader(PixelInputType input) : SV_TARGET
 {
-	return input.color;
+	float4 textureColor;
+	
+	textureColor = shaderTexture.Sample(SampleType, input.tex);
+
+	return textureColor;
 }

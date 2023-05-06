@@ -34,9 +34,9 @@ namespace CLIENT
 
 		mCamera->Render();
 
-		XMMATRIX worldMatrix;
-		XMMATRIX viewMatrix;
-		XMMATRIX projMatrix;
+		matrix worldMatrix;
+		matrix viewMatrix;
+		matrix projMatrix;
 
 		mD3D->GetWorldMatrix(worldMatrix);
 		mCamera->GetViewMatrix(viewMatrix);

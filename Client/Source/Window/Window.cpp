@@ -100,8 +100,8 @@ namespace CLIENT
 
 	void Window::SetWindowDesc()
 	{
-		mWindowDesc.Width  = 1920;
-		mWindowDesc.Height = 1080;
+		mWindowDesc.Width  = Width;
+		mWindowDesc.Height = Height;
 		mWindowDesc.Title  = L"Client";
 		mWindowDesc.hInst  = GetModuleHandle(NULL);
 	}

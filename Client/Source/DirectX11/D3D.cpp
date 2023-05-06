@@ -244,9 +244,9 @@ namespace CLIENT
 		f32 fieldOfView  = 3.14 / 4.0f;
 		f32 screenAspect = (f32)screenWidth / (f32)screenHeight;
 
-		mProj  = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, 0.1f, 1000.0f);
-		mWorld = XMMatrixIdentity();
-		mOrtho = XMMatrixOrthographicLH((f32)screenWidth, (f32)screenHeight, 0.1f, 1000.0f);
+		mProj  = matrix::Convert(XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, 0.1f, 1000.0f));
+		mWorld = matrix::Convert(XMMatrixIdentity());
+		mOrtho = matrix::Convert(XMMatrixOrthographicLH((f32)screenWidth, (f32)screenHeight, 0.1f, 1000.0f));
 
 #pragma endregion
 	}

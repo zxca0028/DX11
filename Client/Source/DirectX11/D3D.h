@@ -21,9 +21,9 @@ namespace CLIENT
 		ComPtr<ID3D11Device>            mDevice;
 		ComPtr<ID3D11DeviceContext>     mDeviceContext;
 	private:
-		XMMATRIX mWorld;
-		XMMATRIX mProj;
-		XMMATRIX mOrtho;
+		matrix mWorld;
+		matrix mProj;
+		matrix mOrtho;
 	public:
 		void Init();
 		void Render();
@@ -41,15 +41,15 @@ namespace CLIENT
 			return mDeviceContext.Get();
 		}
 	public:
-		void GetProjMatrix(XMMATRIX& proj)
+		void GetProjMatrix(matrix& proj)
 		{
 			proj = mProj;
 		}
-		void GetWorldMatrix(XMMATRIX& world)
+		void GetWorldMatrix(matrix& world)
 		{
 			world = mWorld;
 		}
-		void GetOrthoMatrix(XMMATRIX& ortho)
+		void GetOrthoMatrix(matrix& ortho)
 		{
 			ortho = mOrtho;
 		}

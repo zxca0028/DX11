@@ -9,9 +9,9 @@ namespace CLIENT
 	private:
 		struct MatrixBufferType
 		{
-			XMMATRIX worldMatrix;
-			XMMATRIX viewMatrix;
-			XMMATRIX projMatrix;
+			matrix worldMatrix;
+			matrix viewMatrix;
+			matrix projMatrix;
 		};
 	private:
 		ID3D11VertexShader* mVertexShader;
@@ -20,10 +20,10 @@ namespace CLIENT
 		ID3D11Buffer*       mMatrixBuffer;
 	public:
 		void Init(ID3D11Device* device, HWND hWnd);
-		void Render(ID3D11DeviceContext* context, i32 indexCount, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projMatrix);
+		void Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix);
 	private:
 		void InitShader(ID3D11Device* device, HWND hWnd, const wstring& Filename);
-		void SetShaderParameters(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projMatrix);
+		void SetShaderParameters(ID3D11DeviceContext* context, matrix worldMatrix, matrix viewMatrix, matrix projMatrix);
 		void RenderShader(ID3D11DeviceContext* context, i32 indexCount);
 	};
 }

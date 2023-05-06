@@ -35,8 +35,8 @@ namespace CLIENT
 	using f32 = float;
 	using f64 = double;
 
-	const i32 Width = 1920;
-	const i32 Height = 1080;
+	const i32 Width = 1280;
+	const i32 Height = 720;
 
 	template<class T>
 	using vector = std::vector<T>;

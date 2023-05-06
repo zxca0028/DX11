@@ -42,9 +42,9 @@ namespace CLIENT
         vUp     = vector3::TransformCoord(vUp,     rotationMatrix);
         vLookAt = vector3::TransformCoord(vLookAt, rotationMatrix);
 
-        vLookAt = mPosition, vLookAt;
+        vLookAt = mPosition + vLookAt;
 
-        //mViewMatrix = XMMatrixLookAtLH(mPosition.GetSIMD(), sLookAt, sUp);
+        mViewMatrix = matrix::Convert(XMMatrixLookAtLH(mPosition.GetSIMD(), vLookAt.GetSIMD(), vUp.GetSIMD()));
     }
 }
 
