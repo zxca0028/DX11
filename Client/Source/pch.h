@@ -27,7 +27,6 @@
 #include<fstream>
 #include<sstream>
 
-#include<d3dcommon.h>
 #include<d3d11.h>
 
 #include<d3d12.h>
@@ -38,5 +37,7 @@
 #include<DirectXMath.h>
 #include<wrl.h>
 #include<d3dcompiler.h>
+
+
 
 #endif

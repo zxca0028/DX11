@@ -73,26 +73,6 @@ namespace CLIENT
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 
-	template<class T, class ...Args>
-	UniquePtr<T> InitUniquePtr(Args&& ... args)
-	{
-		auto ptr = std::make_unique<T>(std::forward<Args>(args)...);
-
-		ptr->Init();
-
-		return ptr;
-	}
-
-	template<class T, class ...Args>
-	SharedPtr<T> InitSharedPtr(Args&& ... args)
-	{
-		auto ptr = std::make_shared<T>(std::forward<Args>(args)...);
-
-		ptr->Init();
-
-		return ptr;
-	}
-
 	using string = std::string;
 	using wstring = std::wstring;
 }

@@ -238,7 +238,6 @@ namespace CLIENT
 		
 #pragma endregion
 		
-		
 		// Proj, World, Ortho 행렬 설정
 		#pragma region MATRIX_SETTING
 
@@ -267,11 +266,11 @@ namespace CLIENT
 
 		color[0] = 0.0f;
 		color[1] = 0.0f;
-		color[2] = 1.0f;
+		color[2] = 0.0f;
 		color[3] = 0.0f;
 
 		mDeviceContext->ClearRenderTargetView(mRenderTargetView.Get(), color);
-		mDeviceContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 10.f, 0);
+		mDeviceContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.f, 0);
 	}
 
 	void CLIENT::D3D::EndScene()

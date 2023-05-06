@@ -74,6 +74,7 @@
     <OutDir>..\Bin\</OutDir>
     <IntDir>.\Obj\Client\</IntDir>
     <TargetName>Client</TargetName>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -122,6 +123,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,13 +148,16 @@
   <ItemGroup>
     <ClCompile Include="..\Source\Application.cpp" />
     <ClCompile Include="..\Source\Common\Input.cpp" />
+    <ClCompile Include="..\Source\DirectX11\Camera.cpp" />
     <ClCompile Include="..\Source\DirectX11\D3D.cpp" />
     <ClCompile Include="..\Source\DirectX11\Graphics.cpp" />
+    <ClCompile Include="..\Source\DirectX11\Model.cpp" />
     <ClCompile Include="..\Source\Global\GlobalInstance.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\Source\Shaders\ColorShader.cpp" />
     <ClCompile Include="..\Source\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,13 +165,28 @@
     <ClInclude Include="..\Source\Common\Define.h" />
     <ClInclude Include="..\Source\Common\Input.h" />
     <ClInclude Include="..\Source\Core.h" />
+    <ClInclude Include="..\Source\DirectX11\Camera.h" />
     <ClInclude Include="..\Source\DirectX11\D3D.h" />
     <ClInclude Include="..\Source\DirectX11\Graphics.h" />
+    <ClInclude Include="..\Source\DirectX11\Model.h" />
     <ClInclude Include="..\Source\Global\Exception.h" />
     <ClInclude Include="..\Source\Global\GlobalInstance.h" />
     <ClInclude Include="..\Source\Global\Log.h" />
+    <ClInclude Include="..\Source\Math\Matrix.h" />
+    <ClInclude Include="..\Source\Math\Vector.h" />
     <ClInclude Include="..\Source\pch.h" />
+    <ClInclude Include="..\Source\Shaders\ColorShader.h" />
     <ClInclude Include="..\Source\Window\Window.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Source\Shaders\Color.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ColorVertexShader</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

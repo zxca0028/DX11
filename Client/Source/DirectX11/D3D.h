@@ -41,15 +41,15 @@ namespace CLIENT
 			return mDeviceContext.Get();
 		}
 	public:
-		void GetProj(XMMATRIX& proj)
+		void GetProjMatrix(XMMATRIX& proj)
 		{
 			proj = mProj;
 		}
-		void GetWorld(XMMATRIX& world)
+		void GetWorldMatrix(XMMATRIX& world)
 		{
 			world = mWorld;
 		}
-		void GetOrtho(XMMATRIX& ortho)
+		void GetOrthoMatrix(XMMATRIX& ortho)
 		{
 			ortho = mOrtho;
 		}

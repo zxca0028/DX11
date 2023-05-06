@@ -1,6 +1,6 @@
 #pragma once
 
-#include "D3D.h"
+#include "Core.h"
 
 namespace CLIENT
 {
@@ -12,6 +12,9 @@ namespace CLIENT
 		void Render();
 		void Destroy();
 	private:
-		UniquePtr<D3D> mD3D;
+		SharedPtr<class D3D>         mD3D;
+		SharedPtr<class Camera>      mCamera;
+		SharedPtr<class Model>       mModel;
+		SharedPtr<class ColorShader> mColorShader;
 	};
 }

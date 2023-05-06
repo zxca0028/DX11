@@ -11,17 +11,17 @@ namespace CLIENT
 {
     bool CLIENT::Application::Create()
     {
-
         GlobalInstance::Init();
         {
             GlobalInstance::Register<Log>();
             GlobalInstance::Register<Window>();
         }
 
+        mInput    = CreateUniquePtr<Input>();
+        mInput->Init();
 
-
-        mInput    = InitUniquePtr<Input>();
-        mGraphics = InitUniquePtr<Graphics>();
+        mGraphics = CreateUniquePtr<Graphics>();
+        mGraphics->Init();
 
         return true;
     }
