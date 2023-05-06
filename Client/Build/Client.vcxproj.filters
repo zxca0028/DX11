@@ -99,7 +99,6 @@
     <ClInclude Include="..\Source\DirectX11\Model.h">
       <Filter>DirectX11</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="..\Source\DirectX11\Camera.h">
       <Filter>DirectX11</Filter>
     </ClInclude>

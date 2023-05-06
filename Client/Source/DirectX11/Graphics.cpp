@@ -5,6 +5,7 @@
 #include "DirectX11/Camera.h"
 #include "DirectX11/Model.h"
 #include "Shaders/ColorShader.h"
+#include "Shaders/TextureShader.h"
 
 namespace CLIENT
 {
@@ -19,8 +20,11 @@ namespace CLIENT
 		mModel = CreateSharedPtr<Model>();
 		mModel->Init(mD3D->GetDevice());
 
-		mColorShader = CreateSharedPtr<ColorShader>();
-		mColorShader->Init(mD3D->GetDevice(), GlobalInstance::Instance<Window>()->GetWindowDesc().hWnd);
+		//mColorShader = CreateSharedPtr<ColorShader>();
+		//mColorShader->Init(mD3D->GetDevice(), GlobalInstance::Instance<Window>()->GetWindowDesc().hWnd);
+
+		mTextureShader = CreateSharedPtr<TextureShader>();
+		mTextureShader->Init(mD3D->GetDevice(), GlobalInstance::Instance<Window>()->GetWindowDesc().hWnd);
 	}
 
 	void CLIENT::Graphics::Frame()
@@ -44,8 +48,9 @@ namespace CLIENT
 
 		mModel->Render(mD3D->GetDeviceContext());
 
-		mColorShader->Render(mD3D->GetDeviceContext(), mModel->GetIndexCount(), worldMatrix, viewMatrix, projMatrix);
-
+		//mColorShader->Render(mD3D->GetDeviceContext(), mModel->GetIndexCount(), worldMatrix, viewMatrix, projMatrix);
+		mTextureShader->Render(mD3D->GetDeviceContext(), mModel->GetIndexCount(), worldMatrix, viewMatrix, projMatrix, mModel->GetTexture());
+		
 		mD3D->EndScene();
 	}
 

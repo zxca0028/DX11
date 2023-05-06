@@ -17,19 +17,22 @@ namespace CLIENT
 
 	void CLIENT::Model::InitBuffers(ID3D11Device* device)
 	{
-		mVertexCount = 3;
-		mIndexCount  = 3;
+		mVertexCount = 4;
+		mIndexCount  = 6;
 
 		VertexTexType* vertices = new VertexTexType[mVertexCount];
 		{
-			vertices[0].position = vector3(-1.0f, -1.0f, 0.0f);
-			vertices[0].texture  = vector2(0.0f, 1.0f);
+			vertices[0].position = vector3(-1.0f, 1.0f, 0.0f);
+			vertices[0].texture  = vector2(0.0f, 0.0f);
 
-			vertices[1].position = vector3(0.0f, 1.0f, 0.0f);
-			vertices[1].texture  = vector2(0.5f, 0.0f);
+			vertices[1].position = vector3(1.0f, 1.0f, 0.0f);
+			vertices[1].texture  = vector2(1.0f, 0.0f);
 
 			vertices[2].position = vector3(1.0f, -1.0f, 0.0f);
-			vertices[2].texture  = vector2(1.0f, 1.0f);
+			vertices[2].texture  = vector2(1.0f,  1.0f);
+
+			vertices[3].position = vector3(-1.0f, -1.0f, 0.0f);
+			vertices[3].texture  = vector2( 0.0f,  1.0f);
 		}
 
 		u32* indices = new u32[mIndexCount];
@@ -37,15 +40,18 @@ namespace CLIENT
 			indices[0] = 0;
 			indices[1] = 1;
 			indices[2] = 2;
+			indices[3] = 0;
+			indices[4] = 2;
+			indices[5] = 3;
 		}
 
 		D3D11_BUFFER_DESC vectexTexBufferDesc;
 		{
-			vectexTexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-			vectexTexBufferDesc.ByteWidth = sizeof(VertexTexType) * mVertexCount;
-			vectexTexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-			vectexTexBufferDesc.CPUAccessFlags = 0;
-			vectexTexBufferDesc.MiscFlags = 0;
+			vectexTexBufferDesc.Usage               = D3D11_USAGE_DEFAULT;
+			vectexTexBufferDesc.ByteWidth           = sizeof(VertexTexType) * mVertexCount;
+			vectexTexBufferDesc.BindFlags           = D3D11_BIND_VERTEX_BUFFER;
+			vectexTexBufferDesc.CPUAccessFlags      = 0;
+			vectexTexBufferDesc.MiscFlags           = 0;
 			vectexTexBufferDesc.StructureByteStride = 0;
 		}
 
@@ -83,12 +89,8 @@ namespace CLIENT
 		delete[] indices;
 		indices = 0;
 
-
 		/*mVertexCount = 4;
 		mIndexCount  = 6;
-
-		LOG_INFO(sizeof(XMFLOAT3));
-		LOG_INFO(sizeof(vector3));
 
 		VertexType* vertices = new VertexType[mVertexCount];
 		{
@@ -166,7 +168,7 @@ namespace CLIENT
 
 	void CLIENT::Model::RenderBuffers(ID3D11DeviceContext* context)
 	{
-		u32 stride = sizeof(VertexType);
+		u32 stride = sizeof(VertexTexType);
 		u32 offset = 0;
 
 		context->IASetVertexBuffers(0, 1, &mVertexBuffer, &stride, &offset);

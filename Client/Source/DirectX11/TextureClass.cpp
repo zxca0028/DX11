@@ -7,13 +7,13 @@ namespace CLIENT
 	{
 		wstring filePath = L"../Source/IMG/" + path;
 		
-		DirectX::ScratchImage image;
+		ScratchImage image;
 
-		LoadFromWICFile(path.c_str(), DirectX::WIC_FLAGS_NONE, nullptr, image);
+		ThrowIfFailed(LoadFromWICFile(filePath.c_str(), DirectX::WIC_FLAGS_NONE, nullptr, image));
 
 		ComPtr<ID3D11Texture2D> texture;
 
-		DirectX::CreateTexture(device, image.GetImages(), image.GetImageCount(), image.GetMetadata(), (ID3D11Resource**)texture.GetAddressOf());
+		ThrowIfFailed(CreateTexture(device, image.GetImages(), image.GetImageCount(), image.GetMetadata(), (ID3D11Resource**)texture.GetAddressOf()));
 
 		D3D11_TEXTURE2D_DESC textureDesc;
 		texture->GetDesc(&textureDesc);

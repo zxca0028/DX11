@@ -37,12 +37,12 @@ namespace CLIENT
         f32 yaw   = mRotation.y * 0.0174532925f;
         f32 roll  = mRotation.z * 0.0174532925f;
 
-        matrix rotationMatrix = matrix::RotationRollPitchYaw(pitch, yaw, roll);
+        matrix rotationMatrix = matrix::Convert(XMMatrixRotationRollPitchYaw(pitch, yaw, roll));
 
-        vUp     = vector3::TransformCoord(vUp,     rotationMatrix);
-        vLookAt = vector3::TransformCoord(vLookAt, rotationMatrix);
+        vUp     = vector3::Convert(XMVector3TransformCoord(vUp.GetSIMD(), rotationMatrix.GetSIMD()));
+        vLookAt = vector3::Convert(XMVector3TransformCoord(vLookAt.GetSIMD(), rotationMatrix.GetSIMD()));
 
-        vLookAt = mPosition + vLookAt;
+        //vLookAt = mPosition + vLookAt;
 
         mViewMatrix = matrix::Convert(XMMatrixLookAtLH(mPosition.GetSIMD(), vLookAt.GetSIMD(), vUp.GetSIMD()));
     }

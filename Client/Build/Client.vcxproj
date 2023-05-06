@@ -182,7 +182,6 @@
     <ClInclude Include="..\Source\Shaders\ColorShader.h" />
     <ClInclude Include="..\Source\Shaders\TextureShader.h" />
     <ClInclude Include="..\Source\Window\Window.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

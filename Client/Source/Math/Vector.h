@@ -11,6 +11,26 @@ namespace CLIENT
 	public:
 		vector2() : x(0), y(0) {}
 		vector2(float x, float y) : x(x), y(y) {}
+		vector2(XMFLOAT2 v) : x(v.x), y(v.y) {}
+	public:
+		inline vector2 operator + (const vector2& v) const
+		{
+			return vector2(x + v.x, y + v.y);
+		}
+	public:
+		XMVECTOR GetSIMD()
+		{
+			XMFLOAT2 v = XMFLOAT2(x, y);
+
+			return XMLoadFloat2(&v);
+		}
+	public:
+		inline static vector2 Convert(XMVECTOR xv)
+		{
+			XMFLOAT2 v; XMStoreFloat2(&v, xv);
+
+			return vector2(v);
+		}
 	};
 
 	class vector3 final
@@ -36,21 +56,9 @@ namespace CLIENT
 	public:
 		inline static vector3 Convert(XMVECTOR xv)
 		{
-			XMFLOAT3 v;
-
-			XMStoreFloat3(&v, xv);
+			XMFLOAT3 v;	XMStoreFloat3(&v, xv);
 
 			return vector3(v);
-		}
-		inline static vector3 TransformCoord(vector3 v, matrix m)
-		{
-			XMVECTOR xv = XMVector3TransformCoord(v.GetSIMD(), m.GetSIMD());
-
-			XMFLOAT3 v3;
-
-			XMStoreFloat3(&v3, xv);
-
-			return vector3(v3.x, v3.y, v3.z);
 		}
 	};
 
@@ -73,6 +81,13 @@ namespace CLIENT
 			XMFLOAT4 v = XMFLOAT4(x, y, z, w);
 
 			return XMLoadFloat4(&v);
+		}
+	public:
+		inline static vector4 Convert(XMVECTOR xv)
+		{
+			XMFLOAT4 v;	XMStoreFloat4(&v, xv);
+
+			return vector4(v);
 		}
 	};
 }

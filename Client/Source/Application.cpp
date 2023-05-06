@@ -17,7 +17,7 @@ namespace CLIENT
             GlobalInstance::Register<Window>();
         }
 
-        mInput    = CreateUniquePtr<Input>();
+		mInput = CreateUniquePtr<Input>();
         mInput->Init();
 
         mGraphics = CreateUniquePtr<Graphics>();
@@ -32,8 +32,6 @@ namespace CLIENT
         {
             if (GlobalInstance::IsValid<Window>())
             {
-                // ≈∏¿Ã∏”
-
                 if (false == GlobalInstance::Instance<Window>()->Update())
                 {
                     break;

@@ -4,8 +4,6 @@
 
 namespace CLIENT
 {
-	class vector3;
-
 	class matrix final
 	{
 	private:
@@ -49,22 +47,10 @@ namespace CLIENT
 		inline static matrix Convert(XMMATRIX xm)
 		{
 			XMFLOAT4X4 m;
-			
+
 			XMStoreFloat4x4(&m, xm);
 
 			return matrix(m);
-		}
-		inline static matrix RotationRollPitchYaw(float pitch, float yaw, float roll)
-		{
-			XMMATRIX xm = XMMatrixRotationRollPitchYaw(pitch, yaw, roll);
-
-			XMFLOAT4X4 m; XMStoreFloat4x4(&m, xm);
-
-			return matrix(m._11, m._12, m._13, m._14, m._21, m._22, m._23, m._24, m._31, m._32, m._33, m._34, m._41, m._42, m._43, m._44);
-		}
-		inline static matrix Transpose(matrix m)
-		{
-			return Convert(XMMatrixTranspose(m.GetSIMD()));
 		}
 	};
 }

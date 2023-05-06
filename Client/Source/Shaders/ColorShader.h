@@ -22,7 +22,7 @@ namespace CLIENT
 		void Init(ID3D11Device* device, HWND hWnd);
 		void Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix);
 	private:
-		void InitShader(ID3D11Device* device, HWND hWnd, const wstring& Filename);
+		void InitShader(ID3D11Device* device, HWND hWnd, const wstring& fileName);
 		void SetShaderParameters(ID3D11DeviceContext* context, matrix worldMatrix, matrix viewMatrix, matrix projMatrix);
 		void RenderShader(ID3D11DeviceContext* context, i32 indexCount);
 	};

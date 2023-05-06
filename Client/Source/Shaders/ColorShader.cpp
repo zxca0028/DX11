@@ -15,7 +15,7 @@ namespace CLIENT
 		RenderShader(context, indexCount);
 	}
 
-	void CLIENT::ColorShader::InitShader(ID3D11Device* device, HWND hWnd, const wstring& Filename)
+	void CLIENT::ColorShader::InitShader(ID3D11Device* device, HWND hWnd, const wstring& fileName)
 	{
 		u32 compileFlags = 0;
 #if defined(DEBUG) || defined(_DEBUG) 
@@ -23,7 +23,7 @@ namespace CLIENT
 #endif
 
 		HRESULT result;
-		wstring shaderDirectory = L"../Source/Shaders/" + Filename;
+		wstring shaderDirectory = L"../Source/Shaders/" + fileName;
 
 		ComPtr<ID3DBlob> errorMessage;
 		ComPtr<ID3DBlob> vertexShaderBuffer;
@@ -58,7 +58,6 @@ namespace CLIENT
 			ThrowIfFailed(device->CreateInputLayout(polygonLayout, numElements, vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &mLayout));
 		}
 
-
 		D3D11_BUFFER_DESC matrixBufferDesc;
 		{
 			matrixBufferDesc.Usage               = D3D11_USAGE_DYNAMIC;
@@ -80,9 +79,9 @@ namespace CLIENT
 
 		MatrixBufferType* dataPtr = (MatrixBufferType*)mappedResource.pData;
 
-		dataPtr->worldMatrix = matrix::Transpose(worldMatrix);
-		dataPtr->viewMatrix  = matrix::Transpose(viewMatrix);
-		dataPtr->projMatrix  = matrix::Transpose(projMatrix);
+		dataPtr->worldMatrix = matrix::Convert(XMMatrixTranspose(worldMatrix.GetSIMD()));
+		dataPtr->viewMatrix  = matrix::Convert(XMMatrixTranspose(viewMatrix.GetSIMD()));
+		dataPtr->projMatrix  = matrix::Convert(XMMatrixTranspose(projMatrix.GetSIMD()));
 
 		context->Unmap(mMatrixBuffer, 0);
 

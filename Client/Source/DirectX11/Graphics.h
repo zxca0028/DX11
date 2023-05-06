@@ -12,9 +12,10 @@ namespace CLIENT
 		void Render();
 		void Destroy();
 	private:
-		SharedPtr<class D3D>         mD3D;
-		SharedPtr<class Camera>      mCamera;
-		SharedPtr<class Model>       mModel;
-		SharedPtr<class ColorShader> mColorShader;
+		SharedPtr<class D3D>           mD3D;
+		SharedPtr<class Camera>        mCamera;
+		SharedPtr<class Model>         mModel;
+		SharedPtr<class ColorShader>   mColorShader;
+		SharedPtr<class TextureShader> mTextureShader;
 	};
 }
