@@ -4,17 +4,18 @@
 
 namespace CLIENT
 {
-	class Graphics
+	class Renderer final : public ISingleton
 	{
 	public:
-		void Init();
+		virtual void Init() override;
+	public:
 		void Frame();
 		void Render();
 		void Destroy();
 	private:
-		SharedPtr<class D3D>           mD3D;
+	private:
 		SharedPtr<class Camera>        mCamera;
-		SharedPtr<class Model>         mModel;
+		SharedPtr<class Rect>          mRect;
 		SharedPtr<class ColorShader>   mColorShader;
 		SharedPtr<class TextureShader> mTextureShader;
 	};

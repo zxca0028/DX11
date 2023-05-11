@@ -8,9 +8,9 @@ namespace CLIENT
 		InitShader(device, hWnd, L"Color.hlsl");
 	}
 
-	void CLIENT::ColorShader::Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix)
+	void CLIENT::ColorShader::Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix, ID3D11ShaderResourceView* srv)
 	{
-		SetShaderParameters(context, worldMatrix, viewMatrix, projMatrix);
+		SetShaderParameter(context, worldMatrix, viewMatrix, projMatrix, nullptr);
 
 		RenderShader(context, indexCount);
 	}
@@ -71,7 +71,7 @@ namespace CLIENT
 		}
 	}
 
-	void CLIENT::ColorShader::SetShaderParameters(ID3D11DeviceContext* context, matrix worldMatrix, matrix viewMatrix, matrix projMatrix)
+	void CLIENT::ColorShader::SetShaderParameter(ID3D11DeviceContext* context, matrix worldMatrix, matrix viewMatrix, matrix projMatrix, ID3D11ShaderResourceView* srv)
 	{
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DirectX11/Graphics.h"
+#include "Renderer/Renderer.h"
 #include "Common/Input.h"
 
 namespace CLIENT
@@ -8,7 +8,7 @@ namespace CLIENT
 	class Application
 	{
 	private:
-		UniquePtr<class Graphics> mGraphics;
+		UniquePtr<class Renderer> mGraphics;
 		UniquePtr<class Input> mInput;
 	public:
 		bool Create();

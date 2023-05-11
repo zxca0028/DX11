@@ -4,7 +4,7 @@
 
 namespace CLIENT
 {
-	class D3D
+	class D3D final : public ISingleton
 	{
 	private:
 		bool mVSYNC_Enable;
@@ -25,7 +25,8 @@ namespace CLIENT
 		matrix mProj;
 		matrix mOrtho;
 	public:
-		void Init();
+		virtual void Init() override;
+	public:
 		void Render();
 		void Destroy();
 	public:

@@ -3,6 +3,11 @@
 
 namespace CLIENT
 {
+    void Camera::Init()
+    {
+        mPosition.x = 0.0f, mPosition.y = 0.0f, mPosition.z = -10.f;
+    }
+
     void CLIENT::Camera::SetPosition(f32 x, f32 y, f32 z)
     {
 		mPosition.x = x; mPosition.y = y; mPosition.z = z;

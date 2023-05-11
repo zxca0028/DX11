@@ -4,12 +4,14 @@
 
 namespace CLIENT
 {
-	class Camera
+	class Camera final : public ISingleton
 	{
 	private:
 		vector3 mPosition;
 		vector3 mRotation;
 		matrix  mViewMatrix;
+	public:
+		virtual void Init() override;
 	public:
 		void SetPosition(f32 x, f32 y, f32 z);
 		void SetRotation(f32 x, f32 y, f32 z);

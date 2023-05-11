@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "TextureClass.h"
+#include "Texture.h"
 
 namespace CLIENT
 {
-	void CLIENT::TextureClass::Init(ID3D11Device* device, const wstring& path)
+	void CLIENT::Texture::Init(ID3D11Device* device, const wstring& path)
 	{
 		wstring filePath = L"../Source/IMG/" + path;
 		

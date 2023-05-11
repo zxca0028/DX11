@@ -4,7 +4,7 @@
 
 namespace CLIENT
 {
-	class TextureClass final
+	class Texture final
 	{
 	private:
 		ID3D11ShaderResourceView* mTexture;

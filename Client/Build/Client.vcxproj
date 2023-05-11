@@ -150,16 +150,23 @@
     <ClCompile Include="..\Source\Common\Input.cpp" />
     <ClCompile Include="..\Source\DirectX11\Camera.cpp" />
     <ClCompile Include="..\Source\DirectX11\D3D.cpp" />
-    <ClCompile Include="..\Source\DirectX11\Graphics.cpp" />
     <ClCompile Include="..\Source\DirectX11\Model.cpp" />
-    <ClCompile Include="..\Source\DirectX11\TextureClass.cpp" />
+    <ClCompile Include="..\Source\GameObject\GameObject.cpp" />
+    <ClCompile Include="..\Source\GameObject\GameObjectMgr.cpp" />
+    <ClCompile Include="..\Source\GameObject\TestObj.cpp" />
+    <ClCompile Include="..\Source\Geometry\Geometry.cpp" />
+    <ClCompile Include="..\Source\Geometry\Rect.cpp" />
     <ClCompile Include="..\Source\Global\GlobalInstance.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\Source\Renderer\Renderer.cpp" />
     <ClCompile Include="..\Source\Shaders\ColorShader.cpp" />
+    <ClCompile Include="..\Source\Shaders\LightShader.cpp" />
+    <ClCompile Include="..\Source\Shaders\Shader.cpp" />
     <ClCompile Include="..\Source\Shaders\TextureShader.cpp" />
+    <ClCompile Include="..\Source\Texture\Texture.cpp" />
     <ClCompile Include="..\Source\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,28 +177,40 @@
     <ClInclude Include="..\Source\Core.h" />
     <ClInclude Include="..\Source\DirectX11\Camera.h" />
     <ClInclude Include="..\Source\DirectX11\D3D.h" />
-    <ClInclude Include="..\Source\DirectX11\Graphics.h" />
     <ClInclude Include="..\Source\DirectX11\Model.h" />
-    <ClInclude Include="..\Source\DirectX11\TextureClass.h" />
+    <ClInclude Include="..\Source\GameObject\GameObject.h" />
+    <ClInclude Include="..\Source\GameObject\GameObjectMgr.h" />
+    <ClInclude Include="..\Source\GameObject\TestObj.h" />
+    <ClInclude Include="..\Source\Geometry\Geometry.h" />
+    <ClInclude Include="..\Source\Geometry\Rect.h" />
     <ClInclude Include="..\Source\Global\Exception.h" />
     <ClInclude Include="..\Source\Global\GlobalInstance.h" />
     <ClInclude Include="..\Source\Global\Log.h" />
     <ClInclude Include="..\Source\Math\Matrix.h" />
     <ClInclude Include="..\Source\Math\Vector.h" />
     <ClInclude Include="..\Source\pch.h" />
+    <ClInclude Include="..\Source\Renderer\Renderer.h" />
     <ClInclude Include="..\Source\Shaders\ColorShader.h" />
+    <ClInclude Include="..\Source\Shaders\LightShader.h" />
+    <ClInclude Include="..\Source\Shaders\Shader.h" />
     <ClInclude Include="..\Source\Shaders\TextureShader.h" />
+    <ClInclude Include="..\Source\Texture\Texture.h" />
     <ClInclude Include="..\Source\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Source\Shaders\Color.hlsl">
+    <FxCompile Include="..\Source\Shaders\HLSL\Color.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ColorVertexShader</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\Source\Shaders\Texture.hlsl">
+    <FxCompile Include="..\Source\Shaders\HLSL\Light.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">LightVertexShader</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="..\Source\Shaders\HLSL\Texture.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TextureVertexShader</EntryPointName>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>

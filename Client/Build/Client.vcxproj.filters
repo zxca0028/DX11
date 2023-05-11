@@ -23,6 +23,21 @@
     <Filter Include="Math">
       <UniqueIdentifier>{61909933-1778-4828-a58d-f7277072d8f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{bfe20d1d-4267-4c39-940b-de04dfe2e00d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{888c17bf-ba12-4e35-b23a-f0b5b5e15ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{a3d82127-6265-4132-bbcd-07a26d78f3a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{c5b8bed2-4230-4fc5-a4aa-4ef0f9f2968a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{12806c31-6f46-4783-b16d-96c16443306c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -42,9 +57,6 @@
     <ClCompile Include="..\Source\DirectX11\D3D.cpp">
       <Filter>DirectX11</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\DirectX11\Graphics.cpp">
-      <Filter>DirectX11</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Shaders\ColorShader.cpp">
       <Filter>Shaders</Filter>
     </ClCompile>
@@ -57,8 +69,32 @@
     <ClCompile Include="..\Source\Shaders\TextureShader.cpp">
       <Filter>Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\DirectX11\TextureClass.cpp">
-      <Filter>DirectX11</Filter>
+    <ClCompile Include="..\Source\Shaders\LightShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Shaders\Shader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Geometry\Geometry.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Texture\Texture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Geometry\Rect.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GameObject\GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GameObject\GameObjectMgr.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Renderer\Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GameObject\TestObj.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,9 +123,6 @@
     <ClInclude Include="..\Source\DirectX11\D3D.h">
       <Filter>DirectX11</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\DirectX11\Graphics.h">
-      <Filter>DirectX11</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Global\Exception.h">
       <Filter>Global</Filter>
     </ClInclude>
@@ -111,11 +144,35 @@
     <ClInclude Include="..\Source\Shaders\TextureShader.h">
       <Filter>Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\DirectX11\TextureClass.h">
-      <Filter>DirectX11</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\PlugIn\DirectXTex\DirectXTex.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Shaders\LightShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Shaders\Shader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Geometry\Geometry.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Texture\Texture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Geometry\Rect.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\GameObject\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\GameObject\GameObjectMgr.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Renderer\Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\GameObject\TestObj.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -124,10 +181,13 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Source\Shaders\Color.hlsl">
+    <FxCompile Include="..\Source\Shaders\HLSL\Color.hlsl">
       <Filter>Shaders\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="..\Source\Shaders\Texture.hlsl">
+    <FxCompile Include="..\Source\Shaders\HLSL\Texture.hlsl">
+      <Filter>Shaders\HLSL</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Source\Shaders\HLSL\Light.hlsl">
       <Filter>Shaders\HLSL</Filter>
     </FxCompile>
   </ItemGroup>

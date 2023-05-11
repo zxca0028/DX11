@@ -23,7 +23,7 @@ namespace CLIENT
 		i32 mVertexCount;
 		i32 mIndexCount;
 	private:
-		SharedPtr<class TextureClass> mTexture;
+		SharedPtr<class Texture> mTexture;
 	public:
 		void Init(ID3D11Device* device);
 		void Render(ID3D11DeviceContext* context);
