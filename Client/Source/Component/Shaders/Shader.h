@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Core.h"
+#include "Component/Component.h"
 
 namespace CLIENT
 {
-	class Shader abstract
+	class Shader abstract : public Component
 	{
 	protected:
 		struct MatrixBufferType

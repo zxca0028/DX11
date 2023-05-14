@@ -1,13 +1,20 @@
 #include "pch.h"
 #include "GameObject.h"
 #include "GameObjectMgr.h"
-#include "GameObject/TestObj.h"
+#include "GameObject/TestObject/TestObj.h"
 
 namespace CLIENT
 {
 	void CLIENT::GameObjectMgr::Init()
 	{
-		AddGameObject("TestObj", CreateSharedPtr<TestObj>());
+		GameObject::OBJECT_INIT_DESC objDesc_1;
+		{
+			objDesc_1.texture  = L"grass.jpeg";
+			objDesc_1.position = vector3(0.0f, 0.0f, 0.0f);
+
+		}
+
+		ThrowIfFailed(AddGameObject("TestObj1", TestObj::Create(&objDesc_1)));
 	}
 
 	void GameObjectMgr::Update()
@@ -26,13 +33,17 @@ namespace CLIENT
 		}
 	}
 
-	void GameObjectMgr::AddGameObject(const string& objectName, SharedPtr<class GameObject> gameObject)
+	HRESULT GameObjectMgr::AddGameObject(const string& objectName, SharedPtr<class GameObject> gameObject)
 	{
 		if (mObjectPool.find(objectName) == mObjectPool.end())
 		{
 			mObjectPool.emplace(objectName, gameObject);
 
-			gameObject->Init();
+			return S_OK;
+		}
+		else
+		{
+			return E_FAIL;
 		}
 	}
 }

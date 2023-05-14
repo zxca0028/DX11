@@ -7,6 +7,8 @@ namespace CLIENT
 	class ColorShader final : public Shader
 	{
 	public:
+		virtual ~ColorShader() = default;
+	public:
 		virtual void Init(ID3D11Device* device, HWND hWnd) override;
 		virtual void Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix, ID3D11ShaderResourceView* srv) override;
 	private:

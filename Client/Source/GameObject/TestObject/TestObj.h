@@ -1,26 +1,26 @@
 #pragma once
 
-#include "GameObject.h"
+#include "GameObject/GameObject.h"
 
 namespace CLIENT
 {
-	class TestObj1 final : public GameObject
+	class TestObj final : public GameObject 
 	{
-	private:
-		vector3 mPosition;
-	public:
-		TestObj1() = default;
-		TestObj1(vector3 v) : mPosition(v) {}
 	private:
 		SharedPtr<class Rect>          mRect;
 		SharedPtr<class Texture>       mTexture;
 		SharedPtr<class TextureShader> mShader;
 	public:
-		virtual void Init()   override;
+		virtual ~TestObj() = default;
+	public:
+		virtual HRESULT Init(void* args)   override;
+	public:
 		virtual void Update() override;
 		virtual void Render() override;
 	private:
 		virtual void UpdateObject() override;
 		virtual void RenderObject() override;
+	public:
+		static SharedPtr<TestObj> Create(void* args = nullptr);
 	};
 }

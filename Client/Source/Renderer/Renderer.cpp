@@ -4,8 +4,8 @@
 #include "DirectX11/D3D.h"
 #include "DirectX11/Camera.h"
 #include "DirectX11/Model.h"
-#include "Shaders/ColorShader.h"
-#include "Shaders/TextureShader.h"
+#include "Component/Shaders/ColorShader.h"
+#include "Component/Shaders/TextureShader.h"
 
 namespace CLIENT
 {

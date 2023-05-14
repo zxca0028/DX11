@@ -9,8 +9,10 @@
 
 namespace CLIENT
 {
-	void CLIENT::TestObj::Init()
+	HRESULT CLIENT::TestObj::Init(void* args)
 	{
+		memcpy(&initDesc, args, sizeof(OBJECT_INIT_DESC));
+
 		mRect = CreateSharedPtr<Rect>();
 		mRect->Init(GlobalInstance::Instance<D3D>()->GetDevice());
 
@@ -19,6 +21,8 @@ namespace CLIENT
 
 		mShader = CreateSharedPtr<TextureShader>();
 		mShader->Init(GlobalInstance::Instance<D3D>()->GetDevice(), GlobalInstance::Instance<Window>()->GetWindowDesc().hWnd);
+
+		return S_OK;
 	}
 
 	void CLIENT::TestObj::Update()
@@ -33,9 +37,9 @@ namespace CLIENT
 
 		matrix worldMatrix; GlobalInstance::Instance<D3D>()->GetWorldMatrix(worldMatrix);
 		
-		worldMatrix._41 = mPosition.x;
-		worldMatrix._42 = mPosition.y;
-		worldMatrix._43 = mPosition.z;
+		worldMatrix._41 = initDesc.position.x;
+		worldMatrix._42 = initDesc.position.y;
+		worldMatrix._43 = initDesc.position.z;
 
 		matrix projMatrix;  GlobalInstance::Instance<D3D>()->GetProjMatrix(projMatrix);
 		matrix viewMatrix;  GlobalInstance::Instance<Camera>()->GetViewMatrix(viewMatrix);
@@ -50,5 +54,14 @@ namespace CLIENT
 
 	void CLIENT::TestObj::RenderObject()
 	{
+	}
+
+	SharedPtr<TestObj> TestObj::Create(void* args)
+	{
+		auto object = CreateSharedPtr<TestObj>();
+
+		ThrowIfFailed(object->Init(args));
+
+		return object;
 	}
 }

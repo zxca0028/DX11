@@ -14,29 +14,38 @@
     <Filter Include="DirectX11">
       <UniqueIdentifier>{ffaa3fef-af9f-438e-b759-61a6cbbb382d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{711fa7ac-80b0-4658-a4b3-83f990b754f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\HLSL">
-      <UniqueIdentifier>{c04497f6-dde7-4eae-bf2e-43c392944ba9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{61909933-1778-4828-a58d-f7277072d8f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Light">
-      <UniqueIdentifier>{bfe20d1d-4267-4c39-940b-de04dfe2e00d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Geometry">
-      <UniqueIdentifier>{888c17bf-ba12-4e35-b23a-f0b5b5e15ade}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Texture">
-      <UniqueIdentifier>{a3d82127-6265-4132-bbcd-07a26d78f3a6}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{c5b8bed2-4230-4fc5-a4aa-4ef0f9f2968a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{12806c31-6f46-4783-b16d-96c16443306c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{ce651bb4-6259-468f-b41c-8518740505dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Light">
+      <UniqueIdentifier>{bfe20d1d-4267-4c39-940b-de04dfe2e00d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Geometry">
+      <UniqueIdentifier>{888c17bf-ba12-4e35-b23a-f0b5b5e15ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Texture">
+      <UniqueIdentifier>{a3d82127-6265-4132-bbcd-07a26d78f3a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Shaders">
+      <UniqueIdentifier>{711fa7ac-80b0-4658-a4b3-83f990b754f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Shaders\HLSL">
+      <UniqueIdentifier>{c04497f6-dde7-4eae-bf2e-43c392944ba9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Transform">
+      <UniqueIdentifier>{dbca4350-8ab7-4331-9ef8-729dc407d797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\TestObject">
+      <UniqueIdentifier>{613a54bc-4461-48fb-8f0d-f5b1d173b538}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,32 +66,11 @@
     <ClCompile Include="..\Source\DirectX11\D3D.cpp">
       <Filter>DirectX11</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Shaders\ColorShader.cpp">
-      <Filter>Shaders</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\DirectX11\Model.cpp">
       <Filter>DirectX11</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\DirectX11\Camera.cpp">
       <Filter>DirectX11</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Shaders\TextureShader.cpp">
-      <Filter>Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Shaders\LightShader.cpp">
-      <Filter>Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Shaders\Shader.cpp">
-      <Filter>Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Geometry\Geometry.cpp">
-      <Filter>Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Texture\Texture.cpp">
-      <Filter>Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Geometry\Rect.cpp">
-      <Filter>Geometry</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\GameObject\GameObject.cpp">
       <Filter>GameObject</Filter>
@@ -93,8 +81,35 @@
     <ClCompile Include="..\Source\Renderer\Renderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\GameObject\TestObj.cpp">
-      <Filter>GameObject</Filter>
+    <ClCompile Include="..\Source\Component\Geometry\Geometry.cpp">
+      <Filter>Component\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Component\Geometry\Rect.cpp">
+      <Filter>Component\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Component\Shaders\ColorShader.cpp">
+      <Filter>Component\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Component\Shaders\LightShader.cpp">
+      <Filter>Component\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Component\Shaders\Shader.cpp">
+      <Filter>Component\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Component\Shaders\TextureShader.cpp">
+      <Filter>Component\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Component\Texture\Texture.cpp">
+      <Filter>Component\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Component\Transform\Transform.cpp">
+      <Filter>Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Component\Component.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GameObject\TestObject\TestObj.cpp">
+      <Filter>GameObject\TestObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,9 +141,6 @@
     <ClInclude Include="..\Source\Global\Exception.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Shaders\ColorShader.h">
-      <Filter>Shaders</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\DirectX11\Model.h">
       <Filter>DirectX11</Filter>
     </ClInclude>
@@ -141,26 +153,8 @@
     <ClInclude Include="..\Source\Math\Matrix.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\Shaders\TextureShader.h">
-      <Filter>Shaders</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\PlugIn\DirectXTex\DirectXTex.h">
       <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Shaders\LightShader.h">
-      <Filter>Shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Shaders\Shader.h">
-      <Filter>Shaders</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Geometry\Geometry.h">
-      <Filter>Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Texture\Texture.h">
-      <Filter>Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\Geometry\Rect.h">
-      <Filter>Geometry</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\GameObject\GameObject.h">
       <Filter>GameObject</Filter>
@@ -171,8 +165,35 @@
     <ClInclude Include="..\Source\Renderer\Renderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Source\GameObject\TestObj.h">
-      <Filter>GameObject</Filter>
+    <ClInclude Include="..\Source\Component\Geometry\Geometry.h">
+      <Filter>Component\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Geometry\Rect.h">
+      <Filter>Component\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Shaders\ColorShader.h">
+      <Filter>Component\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Shaders\LightShader.h">
+      <Filter>Component\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Shaders\Shader.h">
+      <Filter>Component\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Shaders\TextureShader.h">
+      <Filter>Component\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Texture\Texture.h">
+      <Filter>Component\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Transform\Transform.h">
+      <Filter>Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Component.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\GameObject\TestObject\TestObj.h">
+      <Filter>GameObject\TestObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,14 +202,14 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Source\Shaders\HLSL\Color.hlsl">
-      <Filter>Shaders\HLSL</Filter>
+    <FxCompile Include="..\Source\Component\Shaders\HLSL\Color.hlsl">
+      <Filter>Component\Shaders\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="..\Source\Shaders\HLSL\Texture.hlsl">
-      <Filter>Shaders\HLSL</Filter>
+    <FxCompile Include="..\Source\Component\Shaders\HLSL\Light.hlsl">
+      <Filter>Component\Shaders\HLSL</Filter>
     </FxCompile>
-    <FxCompile Include="..\Source\Shaders\HLSL\Light.hlsl">
-      <Filter>Shaders\HLSL</Filter>
+    <FxCompile Include="..\Source\Component\Shaders\HLSL\Texture.hlsl">
+      <Filter>Component\Shaders\HLSL</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

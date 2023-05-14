@@ -3,9 +3,9 @@
 
 namespace CLIENT
 {
-	void CLIENT::Rect::Init(ID3D11Device* device)
+	HRESULT CLIENT::Rect::Init(ID3D11Device* device)
 	{
-		InitBuffer(device);
+		ThrowIfFailed(InitBuffer(device));
 	}
 
 	void CLIENT::Rect::Render(ID3D11DeviceContext* context)
@@ -13,7 +13,7 @@ namespace CLIENT
 		RenderBuffer(context);
 	}
 
-	void CLIENT::Rect::InitBuffer(ID3D11Device* device)
+	HRESULT CLIENT::Rect::InitBuffer(ID3D11Device* device)
 	{
 		mVertexCount = 4;
 		mIndexCount  = 6;

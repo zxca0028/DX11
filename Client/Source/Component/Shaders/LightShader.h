@@ -4,10 +4,10 @@
 
 namespace CLIENT
 {
-	class TextureShader final : public Shader
+	class LightShader final : public Shader
 	{
-	private:
-		ID3D11SamplerState* mSamplerState;
+	public:
+		virtual ~LightShader() = default;
 	public:
 		virtual void Init(ID3D11Device* device, HWND hWnd) override;
 		virtual void Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix, ID3D11ShaderResourceView* srv) override;

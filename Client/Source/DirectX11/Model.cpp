@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Model.h"
-#include "Texture/Texture.h"
+#include "Component/Texture/Texture.h"
 
 namespace CLIENT
 {

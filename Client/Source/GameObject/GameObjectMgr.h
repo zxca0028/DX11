@@ -14,6 +14,6 @@ namespace CLIENT
 		void Update();
 		void Render();
 	public:
-		void AddGameObject(const string& objectName, SharedPtr<class GameObject> gameObject);
+		HRESULT AddGameObject(const string& objectName, SharedPtr<class GameObject> gameObject);
 	};
 }

@@ -1,13 +1,15 @@
 #pragma once
 
-#include "Core.h"
+#include "Component/Component.h"
 
 namespace CLIENT
 {
-	class Texture final
+	class Texture final : public Component
 	{
 	private:
 		ID3D11ShaderResourceView* mTexture;
+	public:
+		virtual ~Texture() = default;
 	public:
 		void Init(ID3D11Device* device, const wstring& path);
 	public:
