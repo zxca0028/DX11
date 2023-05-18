@@ -1,14 +1,14 @@
 #include "pch.h"
 #include "Window.h"
+#include "Input/Input.h"
 
 namespace CLIENT
 {
-	WindowDesc Window::mWindowDesc = {};
 	vector<WindowCallBack> Window::mCallBack;
 
 	LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
-		for (auto& callBack : Window::mCallBack)
+		/*for (auto& callBack : Window::mCallBack)
 		{
 			LRESULT result = callBack(hWnd, msg, wParam, lParam);
 			if (result)
@@ -23,14 +23,12 @@ namespace CLIENT
 		case WM_DESTROY:
 			::PostQuitMessage(0);
 			break;
-		}
+		}*/
 		return ::DefWindowProc(hWnd, msg, wParam, lParam);
 	}
 
 	void CLIENT::Window::Init()
 	{
-		SetWindowDesc();
-
 		WNDCLASSEXW wcex = {};
 		{
 			wcex.cbSize        = sizeof(WNDCLASSEX);
@@ -38,24 +36,24 @@ namespace CLIENT
 			wcex.lpfnWndProc   = WndProc;
 			wcex.cbClsExtra    = 0;
 			wcex.cbWndExtra    = 0;
-			wcex.hInstance     = mWindowDesc.hInst;
+			wcex.hInstance     = ghInst = GetModuleHandle(NULL);
 			wcex.hIcon         = LoadIcon(0, IDI_APPLICATION);
 			wcex.hCursor       = LoadCursor(nullptr, IDC_ARROW);
 			wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 			wcex.lpszMenuName  = NULL;
-			wcex.lpszClassName = mWindowDesc.Title;
+			wcex.lpszClassName = L"Client";
 			wcex.hIconSm       = LoadIcon(0, IDI_APPLICATION);
 
 			RegisterClassExW(&wcex);
 		}
 
-		RECT rcWindow = { 0, 0, Width, Height };
+		RECT rcWindow = { 0, 0, gScreenWidth, gScreenHeight };
 		AdjustWindowRect(&rcWindow, WS_OVERLAPPEDWINDOW, false);
 
-		mWindowDesc.hWnd = CreateWindowW
+		ghWnd = CreateWindowW
 		(
-			mWindowDesc.Title,
-			mWindowDesc.Title,
+			L"Client",
+			L"Client",
 			WS_OVERLAPPEDWINDOW,
 			CW_USEDEFAULT,
 			CW_USEDEFAULT,
@@ -63,17 +61,17 @@ namespace CLIENT
 			rcWindow.bottom - rcWindow.top,
 			nullptr,
 			nullptr,
-			mWindowDesc.hInst,
+			ghInst,
 			nullptr
 		);
 
-		if (0 == mWindowDesc.hWnd)
+		if (0 == ghWnd)
 		{
 			LOG_ERROR("Fail to Register Window");
 		}
 
-		ShowWindow(mWindowDesc.hWnd, SW_NORMAL);
-		UpdateWindow(mWindowDesc.hWnd);
+		ShowWindow(ghWnd, SW_NORMAL);
+		UpdateWindow(ghWnd);
 
 		LOG_INFO("Complete to Register Window");
 	}
@@ -93,16 +91,41 @@ namespace CLIENT
 			{
 				return false;
 			}
+
+			if (GlobalInstance::Instance<Input>()->IsEscapePressed() == true)
+			{
+				return false;
+			}
 		}
 
-		return true;
-	}
+		/*MSG msg;
+		bool done;
 
-	void Window::SetWindowDesc()
-	{
-		mWindowDesc.Width  = Width;
-		mWindowDesc.Height = Height;
-		mWindowDesc.Title  = L"Client";
-		mWindowDesc.hInst  = GetModuleHandle(NULL);
+		ZeroMemory(&msg, sizeof(MSG));
+
+		done = false;
+
+		while (!done)
+		{
+			if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+
+			if (msg.message == WM_QUIT)
+			{
+				done = true;
+			}
+			else
+			{
+				if (GlobalInstance::Instance<Input>()->IsEscapePressed() == true)
+				{
+					done = true;
+				}
+			}
+		}*/
+
+		return true;
 	}
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Renderer/Renderer.h"
-#include "Common/Input.h"
+#include "Input/Input.h"
 
 namespace CLIENT
 {
@@ -9,7 +9,6 @@ namespace CLIENT
 	{
 	private:
 		UniquePtr<class Renderer> mGraphics;
-		UniquePtr<class Input> mInput;
 	public:
 		bool Create();
 		void Run();

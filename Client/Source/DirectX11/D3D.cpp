@@ -6,10 +6,6 @@ namespace CLIENT
 {
 	void CLIENT::D3D::Init()
 	{
-		HWND hWnd		  = GlobalInstance::Instance<Window>()->GetWindowDesc().hWnd;
-		u32  screenWidth  = GlobalInstance::Instance<Window>()->GetWindowDesc().Width;
-		u32  screenHeight = GlobalInstance::Instance<Window>()->GetWindowDesc().Height;
-
 		// 장치 조사, 새로고침 비율 얻어오기
 		#pragma region FACTORY
 
@@ -38,9 +34,9 @@ namespace CLIENT
 
 		for (u32 i = 0; i < numModes; ++i)
 		{
-			if (displayModeList[i].Width == screenWidth)
+			if (displayModeList[i].Width == gScreenWidth)
 			{
-				if (displayModeList[i].Height == screenHeight)
+				if (displayModeList[i].Height == gScreenHeight)
 				{
 					numerator = displayModeList[i].RefreshRate.Numerator;
 					denominator = displayModeList[i].RefreshRate.Denominator;
@@ -82,13 +78,13 @@ namespace CLIENT
 			ZeroMemory(&swapChainDesc, sizeof(swapChainDesc));
 
 			swapChainDesc.BufferCount                        = 1;
-			swapChainDesc.BufferDesc.Width                   = screenWidth;
-			swapChainDesc.BufferDesc.Height                  = screenHeight;
+			swapChainDesc.BufferDesc.Width                   = gScreenWidth;
+			swapChainDesc.BufferDesc.Height                  = gScreenHeight;
 			swapChainDesc.BufferDesc.Format                  = DXGI_FORMAT_R8G8B8A8_UNORM;
 			swapChainDesc.BufferDesc.RefreshRate.Numerator   = numerator;
 			swapChainDesc.BufferDesc.RefreshRate.Denominator = denominator;
 			swapChainDesc.BufferUsage                        = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-			swapChainDesc.OutputWindow                       = hWnd;
+			swapChainDesc.OutputWindow                       = ghWnd;
 			swapChainDesc.SampleDesc.Count					 = 1;
 			swapChainDesc.SampleDesc.Quality				 = 0;
 			swapChainDesc.Windowed							 = true;
@@ -123,8 +119,8 @@ namespace CLIENT
 		{
 			ZeroMemory(&depthBufferDesc, sizeof(depthBufferDesc));
 
-			depthBufferDesc.Width              = screenWidth;
-			depthBufferDesc.Height             = screenHeight;
+			depthBufferDesc.Width              = gScreenWidth;
+			depthBufferDesc.Height             = gScreenHeight;
 			depthBufferDesc.MipLevels          = 1;
 			depthBufferDesc.ArraySize          = 1;
 			depthBufferDesc.Format             = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -226,8 +222,8 @@ namespace CLIENT
 
 		D3D11_VIEWPORT viewport;
 		{
-			viewport.Width    = (f32)screenWidth;
-			viewport.Height   = (f32)screenHeight;
+			viewport.Width    = (f32)gScreenWidth;
+			viewport.Height   = (f32)gScreenHeight;
 			viewport.MinDepth = 0.0f;
 			viewport.MaxDepth = 1.0f;
 			viewport.TopLeftX = 0.0f;
@@ -242,11 +238,11 @@ namespace CLIENT
 		#pragma region MATRIX_SETTING
 
 		f32 fieldOfView  = 3.14 / 4.0f;
-		f32 screenAspect = (f32)screenWidth / (f32)screenHeight;
+		f32 screenAspect = (f32)gScreenWidth / (f32)gScreenHeight;
 
 		mProj  = matrix::Convert(XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, 0.1f, 1000.0f));
 		mWorld = matrix::Convert(XMMatrixIdentity());
-		mOrtho = matrix::Convert(XMMatrixOrthographicLH((f32)screenWidth, (f32)screenHeight, 0.1f, 1000.0f));
+		mOrtho = matrix::Convert(XMMatrixOrthographicLH((f32)gScreenWidth, (f32)gScreenHeight, 0.1f, 1000.0f));
 
 #pragma endregion
 	}

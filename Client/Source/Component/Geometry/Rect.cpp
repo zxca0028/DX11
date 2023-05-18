@@ -6,6 +6,8 @@ namespace CLIENT
 	HRESULT CLIENT::Rect::Init(ID3D11Device* device)
 	{
 		ThrowIfFailed(InitBuffer(device));
+
+		return S_OK;
 	}
 
 	void CLIENT::Rect::Render(ID3D11DeviceContext* context)
@@ -82,6 +84,8 @@ namespace CLIENT
 
 		delete[] indices;
 		indices = 0;
+
+		return S_OK;
 	}
 
 	void CLIENT::Rect::RenderBuffer(ID3D11DeviceContext* context)

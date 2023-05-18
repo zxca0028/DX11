@@ -147,7 +147,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Application.cpp" />
-    <ClCompile Include="..\Source\Common\Input.cpp" />
     <ClCompile Include="..\Source\Component\Component.cpp" />
     <ClCompile Include="..\Source\Component\Geometry\Geometry.cpp" />
     <ClCompile Include="..\Source\Component\Geometry\Rect.cpp" />
@@ -164,6 +163,7 @@
     <ClCompile Include="..\Source\GameObject\GameObjectMgr.cpp" />
     <ClCompile Include="..\Source\GameObject\TestObject\TestObj.cpp" />
     <ClCompile Include="..\Source\Global\GlobalInstance.cpp" />
+    <ClCompile Include="..\Source\Input\Input.cpp" />
     <ClCompile Include="..\Source\main.cpp" />
     <ClCompile Include="..\Source\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -175,7 +175,6 @@
     <ClInclude Include="..\..\PlugIn\DirectXTex\DirectXTex.h" />
     <ClInclude Include="..\Source\Application.h" />
     <ClInclude Include="..\Source\Common\Define.h" />
-    <ClInclude Include="..\Source\Common\Input.h" />
     <ClInclude Include="..\Source\Component\Component.h" />
     <ClInclude Include="..\Source\Component\Geometry\Geometry.h" />
     <ClInclude Include="..\Source\Component\Geometry\Rect.h" />
@@ -195,6 +194,7 @@
     <ClInclude Include="..\Source\Global\Exception.h" />
     <ClInclude Include="..\Source\Global\GlobalInstance.h" />
     <ClInclude Include="..\Source\Global\Log.h" />
+    <ClInclude Include="..\Source\Input\Input.h" />
     <ClInclude Include="..\Source\Math\Matrix.h" />
     <ClInclude Include="..\Source\Math\Vector.h" />
     <ClInclude Include="..\Source\pch.h" />

@@ -47,6 +47,9 @@
     <Filter Include="GameObject\TestObject">
       <UniqueIdentifier>{613a54bc-4461-48fb-8f0d-f5b1d173b538}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{6cbeb3f4-6db8-460a-a72f-7faaaa3e492e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -60,9 +63,6 @@
       <Filter>Window</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Application.cpp" />
-    <ClCompile Include="..\Source\Common\Input.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\DirectX11\D3D.cpp">
       <Filter>DirectX11</Filter>
     </ClCompile>
@@ -111,6 +111,9 @@
     <ClCompile Include="..\Source\GameObject\TestObject\TestObj.cpp">
       <Filter>GameObject\TestObject</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Input\Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Common\Define.h">
@@ -132,9 +135,6 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Application.h" />
-    <ClInclude Include="..\Source\Common\Input.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\DirectX11\D3D.h">
       <Filter>DirectX11</Filter>
     </ClInclude>
@@ -194,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="..\Source\GameObject\TestObject\TestObj.h">
       <Filter>GameObject\TestObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Input\Input.h">
+      <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

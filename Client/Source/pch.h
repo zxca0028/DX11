@@ -28,7 +28,7 @@
 #include<sstream>
 
 #include<d3d11.h>
-
+#include<dinput.h>
 #include<d3d12.h>
 #include<dxgi1_6.h>
 #include<DirectXPackedVector.h>

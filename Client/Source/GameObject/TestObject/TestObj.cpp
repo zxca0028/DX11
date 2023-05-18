@@ -9,18 +9,18 @@
 
 namespace CLIENT
 {
-	HRESULT CLIENT::TestObj::Init(void* args)
+	HRESULT CLIENT::TestObj::Init(const OBJECT_INIT_DESC& desc)
 	{
-		memcpy(&initDesc, args, sizeof(OBJECT_INIT_DESC));
+		mInitDesc = desc;
 
 		mRect = CreateSharedPtr<Rect>();
 		mRect->Init(GlobalInstance::Instance<D3D>()->GetDevice());
 
 		mTexture = CreateSharedPtr<Texture>();
-		mTexture->Init(GlobalInstance::Instance<D3D>()->GetDevice(), L"grass.jpeg");
+		mTexture->Init(GlobalInstance::Instance<D3D>()->GetDevice(), mInitDesc.texture);
 
 		mShader = CreateSharedPtr<TextureShader>();
-		mShader->Init(GlobalInstance::Instance<D3D>()->GetDevice(), GlobalInstance::Instance<Window>()->GetWindowDesc().hWnd);
+		mShader->Init(GlobalInstance::Instance<D3D>()->GetDevice(), ghWnd);
 
 		return S_OK;
 	}
@@ -37,9 +37,9 @@ namespace CLIENT
 
 		matrix worldMatrix; GlobalInstance::Instance<D3D>()->GetWorldMatrix(worldMatrix);
 		
-		worldMatrix._41 = initDesc.position.x;
-		worldMatrix._42 = initDesc.position.y;
-		worldMatrix._43 = initDesc.position.z;
+		worldMatrix._41 = mInitDesc.position.x;
+		worldMatrix._42 = mInitDesc.position.y;
+		worldMatrix._43 = mInitDesc.position.z;
 
 		matrix projMatrix;  GlobalInstance::Instance<D3D>()->GetProjMatrix(projMatrix);
 		matrix viewMatrix;  GlobalInstance::Instance<Camera>()->GetViewMatrix(viewMatrix);
@@ -56,11 +56,11 @@ namespace CLIENT
 	{
 	}
 
-	SharedPtr<TestObj> TestObj::Create(void* args)
+	SharedPtr<TestObj> TestObj::Create(const OBJECT_INIT_DESC& desc)
 	{
 		auto object = CreateSharedPtr<TestObj>();
 
-		ThrowIfFailed(object->Init(args));
+		ThrowIfFailed(object->Init(desc));
 
 		return object;
 	}

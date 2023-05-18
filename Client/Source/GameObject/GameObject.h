@@ -13,7 +13,7 @@ namespace CLIENT
 			vector3 position;
 		};
 	protected:
-		OBJECT_INIT_DESC initDesc;
+		OBJECT_INIT_DESC mInitDesc;
 	protected:
 		virtual ~GameObject() = default;
 	public:
