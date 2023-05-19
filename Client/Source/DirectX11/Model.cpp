@@ -282,7 +282,7 @@ namespace CLIENT
 	void Model::InitTexture(ID3D11Device* device, const wstring& fileName)
 	{
 		mTexture = CreateSharedPtr<Texture>();
-		mTexture->Init(device, fileName);
+		//mTexture->Init(device, fileName);
 	}
 
 	void CLIENT::Model::RenderBuffers(ID3D11DeviceContext* context)

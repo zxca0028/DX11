@@ -15,11 +15,13 @@ namespace CLIENT
 	public:
 		virtual ~Rect() = default;
 	public:
-		virtual HRESULT Init(ID3D11Device* device) override;
-		virtual void    Render(ID3D11DeviceContext* context) override;
+		virtual HRESULT Init(const COMPONENT_INIT_DESC* desc) override;
+		virtual void    Render() override;
 	private:
-		virtual HRESULT InitBuffer(ID3D11Device* device) override;
-		virtual void    RenderBuffer(ID3D11DeviceContext* context) override;
+		virtual HRESULT InitBuffer() override;
+		virtual void    RenderBuffer() override;
+	public:
+		static SharedPtr<Rect> Create(const COMPONENT_INIT_DESC* desc = nullptr);
 	};
 }
 

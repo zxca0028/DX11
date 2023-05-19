@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "Application.h"
 #include "DirectX11/D3D.h"
+#include "Global/Pipeline.h"
 #include "Renderer/Renderer.h"
 #include "Input/Input.h"
 #include "Window/Window.h"
 #include "GameObject/GameObjectMgr.h"
-#include "DirectX11/Camera.h"
 
 namespace CLIENT
 {
@@ -22,9 +22,9 @@ namespace CLIENT
             GlobalInstance::Register<Window>();
             GlobalInstance::Register<D3D>();
             GlobalInstance::Register<Renderer>();
+            GlobalInstance::Register<Pipeline>();
             GlobalInstance::Register<Input>();
 
-            GlobalInstance::Register<Camera>();
             GlobalInstance::Register<GameObjectMgr>();
         }
 
@@ -42,7 +42,6 @@ namespace CLIENT
 
             GlobalInstance::Instance<Input>()->Update();
 
-			GlobalInstance::Instance<Camera>()->Render();
 			GlobalInstance::Instance<GameObjectMgr>()->Update();
 
 			GlobalInstance::Instance<D3D>()->BeginScene();

@@ -50,6 +50,9 @@
     <Filter Include="Input">
       <UniqueIdentifier>{6cbeb3f4-6db8-460a-a72f-7faaaa3e492e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Camera">
+      <UniqueIdentifier>{8bd6ed69-a495-4d19-86bc-7047ca5ab88e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -67,9 +70,6 @@
       <Filter>DirectX11</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\DirectX11\Model.cpp">
-      <Filter>DirectX11</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\DirectX11\Camera.cpp">
       <Filter>DirectX11</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\GameObject\GameObject.cpp">
@@ -114,6 +114,12 @@
     <ClCompile Include="..\Source\Input\Input.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\GameObject\Camera\Camera.cpp">
+      <Filter>GameObject\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Global\Pipeline.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Common\Define.h">
@@ -142,9 +148,6 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\DirectX11\Model.h">
-      <Filter>DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\DirectX11\Camera.h">
       <Filter>DirectX11</Filter>
     </ClInclude>
     <ClInclude Include="..\Source\Math\Vector.h">
@@ -197,6 +200,12 @@
     </ClInclude>
     <ClInclude Include="..\Source\Input\Input.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\GameObject\Camera\Camera.h">
+      <Filter>GameObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Global\Pipeline.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

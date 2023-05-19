@@ -2,31 +2,42 @@
 #include "GameObject.h"
 #include "GameObjectMgr.h"
 #include "GameObject/TestObject/TestObj.h"
+#include "GameObject/Camera/Camera.h"
 
 namespace CLIENT
 {
 	void CLIENT::GameObjectMgr::Init()
 	{
-		GameObject::OBJECT_INIT_DESC objDesc_1;
+		GameObject::OBJECT_INIT_DESC cameraInitDesc;
 		{
-			objDesc_1.texture  = L"grass.jpeg";
-			objDesc_1.position = vector3(-1.0f, 0.0f, 0.0f);
+			cameraInitDesc.position = vector3(0.0f, 0.0f, -10.0f);
 
-			ThrowIfFailed(AddGameObject("TestObj1", TestObj::Create(objDesc_1)));
+			ThrowIfFailed(AddGameObject("Camera", Camera::Create(&cameraInitDesc)));
 		}
-		GameObject::OBJECT_INIT_DESC objDesc_2;
-		{
-			objDesc_2.texture = L"stone.jpg";
-			objDesc_2.position = vector3(0.0f, 0.0f, 0.0f);
 
-			ThrowIfFailed(AddGameObject("TestObj2", TestObj::Create(objDesc_2)));
+		GameObject::OBJECT_INIT_DESC obj_1_InitDesc;
+		{
+			obj_1_InitDesc.texture  = L"grass.jpeg";
+			obj_1_InitDesc.shader   = L"Texture.hlsl";
+			obj_1_InitDesc.position = vector3(-1.0f, 0.0f, 0.0f);
+
+			ThrowIfFailed(AddGameObject("TestObj1", TestObj::Create(&obj_1_InitDesc)));
 		}
-		GameObject::OBJECT_INIT_DESC objDesc_3;
+		GameObject::OBJECT_INIT_DESC obj_2_InitDesc;
 		{
-			objDesc_3.texture = L"grass.jpeg";
-			objDesc_3.position = vector3(1.0f, 0.0f, 0.0f);
+			obj_2_InitDesc.texture  = L"stone.jpg";
+			obj_2_InitDesc.shader   = L"Texture.hlsl";
+			obj_2_InitDesc.position = vector3(0.0f, 0.0f, 0.0f);
 
-			ThrowIfFailed(AddGameObject("TestObj3", TestObj::Create(objDesc_3)));
+			ThrowIfFailed(AddGameObject("TestObj2", TestObj::Create(&obj_2_InitDesc)));
+		}
+		GameObject::OBJECT_INIT_DESC obj_3_InitDesc;
+		{
+			obj_3_InitDesc.texture  = L"grass.jpeg";
+			obj_3_InitDesc.shader   = L"Texture.hlsl";
+			obj_3_InitDesc.position = vector3(1.0f, 0.0f, 0.0f);
+
+			ThrowIfFailed(AddGameObject("TestObj3", TestObj::Create(&obj_3_InitDesc)));
 		}
 	}
 

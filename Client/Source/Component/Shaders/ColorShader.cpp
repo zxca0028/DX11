@@ -1,11 +1,16 @@
 #include "pch.h"
 #include "ColorShader.h"
+#include "DirectX11/D3D.h"
 
 namespace CLIENT
 {
-	void CLIENT::ColorShader::Init(ID3D11Device* device, HWND hWnd)
+	HRESULT CLIENT::ColorShader::Init(const COMPONENT_INIT_DESC* desc)
 	{
-		InitShader(device, hWnd, L"Color.hlsl");
+		mInitDesc = *desc;
+
+		InitShader();
+
+		return S_OK;
 	}
 
 	void CLIENT::ColorShader::Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix, ID3D11ShaderResourceView* srv)
@@ -15,7 +20,7 @@ namespace CLIENT
 		RenderShader(context, indexCount);
 	}
 
-	void CLIENT::ColorShader::InitShader(ID3D11Device* device, HWND hWnd, const wstring& fileName)
+	void CLIENT::ColorShader::InitShader()
 	{
 		u32 compileFlags = 0;
 #if defined(DEBUG) || defined(_DEBUG) 
@@ -23,17 +28,17 @@ namespace CLIENT
 #endif
 
 		HRESULT result;
-		wstring shaderDirectory = L"../Source/Shaders/" + fileName;
+		wstring shaderDirectory = L"../Source/Shaders/" + mInitDesc.path;
 
 		ComPtr<ID3DBlob> errorMessage;
 		ComPtr<ID3DBlob> vertexShaderBuffer;
 		ComPtr<ID3DBlob> pixelShaderBuffer;
-
+		
 		ThrowIfFailed(D3DCompileFromFile(shaderDirectory.c_str(), nullptr, nullptr, "ColorVertexShader", "vs_5_0", compileFlags, 0, &vertexShaderBuffer, &errorMessage));
-		ThrowIfFailed(device->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), nullptr, &mVertexShader));
+		ThrowIfFailed(GlobalInstance::Instance<D3D>()->GetDevice()->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), nullptr, &mVertexShader));
 
 		ThrowIfFailed(D3DCompileFromFile(shaderDirectory.c_str(), nullptr, nullptr, "ColorPixelShader", "ps_5_0", compileFlags, 0, &pixelShaderBuffer, &errorMessage));
-		ThrowIfFailed(device->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(),   pixelShaderBuffer->GetBufferSize(),  nullptr, &mPixelShader));
+		ThrowIfFailed(GlobalInstance::Instance<D3D>()->GetDevice()->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(),   pixelShaderBuffer->GetBufferSize(),  nullptr, &mPixelShader));
 
 		D3D11_INPUT_ELEMENT_DESC polygonLayout[2];
 		{
@@ -55,7 +60,7 @@ namespace CLIENT
 
 			u32 numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
-			ThrowIfFailed(device->CreateInputLayout(polygonLayout, numElements, vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &mLayout));
+			ThrowIfFailed(GlobalInstance::Instance<D3D>()->GetDevice()->CreateInputLayout(polygonLayout, numElements, vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &mLayout));
 		}
 
 		D3D11_BUFFER_DESC matrixBufferDesc;
@@ -67,7 +72,7 @@ namespace CLIENT
 			matrixBufferDesc.MiscFlags           = 0;
 			matrixBufferDesc.StructureByteStride = 0;
 
-			ThrowIfFailed(device->CreateBuffer(&matrixBufferDesc, nullptr, &mMatrixBuffer));
+			ThrowIfFailed(GlobalInstance::Instance<D3D>()->GetDevice()->CreateBuffer(&matrixBufferDesc, nullptr, &mMatrixBuffer));
 		}
 	}
 
@@ -98,5 +103,14 @@ namespace CLIENT
 		context->PSSetShader(mPixelShader,  nullptr, 0);
 
 		context->DrawIndexed(indexCount, 0, 0);
+	}
+
+	SharedPtr<ColorShader> ColorShader::Create(const COMPONENT_INIT_DESC* desc)
+	{
+		auto component = CreateSharedPtr<ColorShader>();
+
+		ThrowIfFailed(component->Init(desc));
+
+		return component;
 	}
 }

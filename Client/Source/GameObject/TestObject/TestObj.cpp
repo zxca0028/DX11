@@ -2,25 +2,33 @@
 #include "TestObj.h"
 #include "Window/Window.h"
 #include "DirectX11/D3D.h"
-#include "DirectX11/Camera.h"
+#include "Global/Pipeline.h"
+#include "GameObject/Camera/Camera.h"
 #include "Component/Geometry/Rect.h"
 #include "Component/Texture/Texture.h"
 #include "Component/Shaders/TextureShader.h"
 
 namespace CLIENT
 {
-	HRESULT CLIENT::TestObj::Init(const OBJECT_INIT_DESC& desc)
+	HRESULT CLIENT::TestObj::Init(const OBJECT_INIT_DESC* desc)
 	{
-		mInitDesc = desc;
+		mInitDesc = *desc;
 
-		mRect = CreateSharedPtr<Rect>();
-		mRect->Init(GlobalInstance::Instance<D3D>()->GetDevice());
+		mRect = Rect::Create();
 
-		mTexture = CreateSharedPtr<Texture>();
-		mTexture->Init(GlobalInstance::Instance<D3D>()->GetDevice(), mInitDesc.texture);
+		Component::COMPONENT_INIT_DESC textureInitDesc;
+		{
+			textureInitDesc.path = mInitDesc.texture;
 
-		mShader = CreateSharedPtr<TextureShader>();
-		mShader->Init(GlobalInstance::Instance<D3D>()->GetDevice(), ghWnd);
+			mTexture = Texture::Create(&textureInitDesc);
+		}
+
+		Component::COMPONENT_INIT_DESC shaderInitDesc;
+		{
+			shaderInitDesc.path = mInitDesc.shader;
+
+			mShader = TextureShader::Create(&shaderInitDesc);
+		}
 
 		return S_OK;
 	}
@@ -41,10 +49,10 @@ namespace CLIENT
 		worldMatrix._42 = mInitDesc.position.y;
 		worldMatrix._43 = mInitDesc.position.z;
 
-		matrix projMatrix;  GlobalInstance::Instance<D3D>()->GetProjMatrix(projMatrix);
-		matrix viewMatrix;  GlobalInstance::Instance<Camera>()->GetViewMatrix(viewMatrix);
+		matrix projMatrix;  GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::PROJ);
+		matrix viewMatrix;  GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::VIEW);
 
-		mRect->Render(context);
+		mRect->Render();
 		mShader->Render(context, indexCount, worldMatrix, viewMatrix, projMatrix, srv);
 	}
 
@@ -56,7 +64,7 @@ namespace CLIENT
 	{
 	}
 
-	SharedPtr<TestObj> TestObj::Create(const OBJECT_INIT_DESC& desc)
+	SharedPtr<TestObj> TestObj::Create(const OBJECT_INIT_DESC* desc)
 	{
 		auto object = CreateSharedPtr<TestObj>();
 

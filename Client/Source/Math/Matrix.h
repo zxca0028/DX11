@@ -52,5 +52,9 @@ namespace CLIENT
 
 			return matrix(m);
 		}
+		inline static matrix Inverse(matrix m)
+		{
+			return matrix::Convert(XMMatrixInverse(nullptr, m.GetSIMD()));
+		}
 	};
 }

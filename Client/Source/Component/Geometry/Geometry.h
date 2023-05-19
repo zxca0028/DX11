@@ -15,11 +15,11 @@ namespace CLIENT
 	protected:
 		virtual ~Geometry() = default;
 	public:
-		virtual HRESULT Init(ID3D11Device* device) = 0;
-		virtual void    Render(ID3D11DeviceContext* context) = 0;
+		virtual HRESULT Init(const COMPONENT_INIT_DESC* desc) = 0;
+		virtual void    Render() = 0;
 	protected:
-		virtual HRESULT InitBuffer(ID3D11Device* device) = 0;
-		virtual void    RenderBuffer(ID3D11DeviceContext* context) = 0;
+		virtual HRESULT InitBuffer() = 0;
+		virtual void    RenderBuffer() = 0;
 	public:
 		i32 GetIndexCount() const
 		{

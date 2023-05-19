@@ -1,21 +1,22 @@
 #include "pch.h"
 #include "Rect.h"
+#include "DirectX11/D3D.h"
 
 namespace CLIENT
 {
-	HRESULT CLIENT::Rect::Init(ID3D11Device* device)
+	HRESULT CLIENT::Rect::Init(const COMPONENT_INIT_DESC* desc)
 	{
-		ThrowIfFailed(InitBuffer(device));
+		ThrowIfFailed(InitBuffer());
 
 		return S_OK;
 	}
 
-	void CLIENT::Rect::Render(ID3D11DeviceContext* context)
+	void CLIENT::Rect::Render()
 	{
-		RenderBuffer(context);
+		RenderBuffer();
 	}
 
-	HRESULT CLIENT::Rect::InitBuffer(ID3D11Device* device)
+	HRESULT CLIENT::Rect::InitBuffer()
 	{
 		mVertexCount = 4;
 		mIndexCount  = 6;
@@ -57,8 +58,7 @@ namespace CLIENT
 			vertexTexData.SysMemPitch      = 0;
 			vertexTexData.SysMemSlicePitch = 0;
 		}
-
-		ThrowIfFailed(device->CreateBuffer(&vectexTexBufferDesc, &vertexTexData, &mVertexBuffer));
+		ThrowIfFailed(GlobalInstance::Instance<D3D>()->GetDevice()->CreateBuffer(&vectexTexBufferDesc, &vertexTexData, &mVertexBuffer));
 
 		D3D11_BUFFER_DESC indexTexBufferDesc;
 		{
@@ -77,7 +77,7 @@ namespace CLIENT
 			indexTexData.SysMemSlicePitch = 0;
 		}
 
-		ThrowIfFailed(device->CreateBuffer(&indexTexBufferDesc, &indexTexData, &mIndexBuffer));
+		ThrowIfFailed(GlobalInstance::Instance<D3D>()->GetDevice()->CreateBuffer(&indexTexBufferDesc, &indexTexData, &mIndexBuffer));
 
 		delete[] vertices;
 		vertices = 0;
@@ -88,13 +88,22 @@ namespace CLIENT
 		return S_OK;
 	}
 
-	void CLIENT::Rect::RenderBuffer(ID3D11DeviceContext* context)
+	void CLIENT::Rect::RenderBuffer()
 	{
 		u32 stride = sizeof(VertexTexType);
 		u32 offset = 0;
 
-		context->IASetVertexBuffers(0, 1, &mVertexBuffer, &stride, &offset);
-		context->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		GlobalInstance::Instance<D3D>()->GetDeviceContext()->IASetVertexBuffers(0, 1, &mVertexBuffer, &stride, &offset);
+		GlobalInstance::Instance<D3D>()->GetDeviceContext()->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+		GlobalInstance::Instance<D3D>()->GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	}
+
+	SharedPtr<Rect> Rect::Create(const COMPONENT_INIT_DESC* desc)
+	{
+		auto component = CreateSharedPtr<Rect>();
+
+		ThrowIfFailed(component->Init(desc));
+
+		return component;
 	}
 }

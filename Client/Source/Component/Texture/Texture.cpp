@@ -1,11 +1,14 @@
 #include "pch.h"
 #include "Texture.h"
+#include "DirectX11/D3D.h"
 
 namespace CLIENT
 {
-	void CLIENT::Texture::Init(ID3D11Device* device, const wstring& path)
+	HRESULT CLIENT::Texture::Init(const COMPONENT_INIT_DESC* desc)
 	{
-		wstring filePath = L"../Source/IMG/" + path;
+		mInitDesc = *desc;
+
+		wstring filePath = L"../Source/IMG/" + mInitDesc.path;
 		
 		ScratchImage image;
 
@@ -13,7 +16,7 @@ namespace CLIENT
 
 		ComPtr<ID3D11Texture2D> texture;
 
-		ThrowIfFailed(CreateTexture(device, image.GetImages(), image.GetImageCount(), image.GetMetadata(), (ID3D11Resource**)texture.GetAddressOf()));
+		ThrowIfFailed(CreateTexture(GlobalInstance::Instance<D3D>()->GetDevice(), image.GetImages(), image.GetImageCount(), image.GetMetadata(), (ID3D11Resource**)texture.GetAddressOf()));
 
 		D3D11_TEXTURE2D_DESC textureDesc;
 		texture->GetDesc(&textureDesc);
@@ -27,7 +30,18 @@ namespace CLIENT
 			srvDesc.Texture2D.MipLevels       = 1;
 			srvDesc.Format                    = textureDesc.Format;
 
-			ThrowIfFailed(device->CreateShaderResourceView(texture.Get(), &srvDesc, &mTexture));
+			ThrowIfFailed(GlobalInstance::Instance<D3D>()->GetDevice()->CreateShaderResourceView(texture.Get(), &srvDesc, &mTexture));
 		}
+		
+		return S_OK;
+	}
+
+	SharedPtr<Texture> Texture::Create(const COMPONENT_INIT_DESC* desc)
+	{
+		auto component = CreateSharedPtr<Texture>();
+
+		ThrowIfFailed(component->Init(desc));
+
+		return component;
 	}
 }

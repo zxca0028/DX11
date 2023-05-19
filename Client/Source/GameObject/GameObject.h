@@ -10,6 +10,7 @@ namespace CLIENT
 		struct OBJECT_INIT_DESC
 		{
 			wstring texture;
+			wstring shader;
 			vector3 position;
 		};
 	protected:
@@ -17,7 +18,7 @@ namespace CLIENT
 	protected:
 		virtual ~GameObject() = default;
 	public:
-		virtual HRESULT Init(const OBJECT_INIT_DESC& desc) = 0;
+		virtual HRESULT Init(const OBJECT_INIT_DESC* desc) = 0;
 	public:
 		virtual void Update() = 0;
 		virtual void Render() = 0;

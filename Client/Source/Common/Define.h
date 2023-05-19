@@ -1,5 +1,5 @@
 #pragma once
-#pragma warning(disable : 4005 4819 4101 4305 4996)
+#pragma warning(disable : 4005 4819 4101 4305 4996 4715)
 
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "d3d12.lib")

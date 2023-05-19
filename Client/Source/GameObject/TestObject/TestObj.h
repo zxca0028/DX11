@@ -13,7 +13,7 @@ namespace CLIENT
 	public:
 		virtual ~TestObj() = default;
 	public:
-		virtual HRESULT Init(const OBJECT_INIT_DESC& desc)   override;
+		virtual HRESULT Init(const OBJECT_INIT_DESC* desc)   override;
 	public:
 		virtual void Update() override;
 		virtual void Render() override;
@@ -21,6 +21,6 @@ namespace CLIENT
 		virtual void UpdateObject() override;
 		virtual void RenderObject() override;
 	public:
-		static SharedPtr<TestObj> Create(const OBJECT_INIT_DESC& desc);
+		static SharedPtr<TestObj> Create(const OBJECT_INIT_DESC* desc = nullptr);
 	};
 }

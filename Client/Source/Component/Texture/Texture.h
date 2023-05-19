@@ -10,12 +10,14 @@ namespace CLIENT
 		ID3D11ShaderResourceView* mTexture;
 	public:
 		virtual ~Texture() = default;
-	public:
-		void Init(ID3D11Device* device, const wstring& path);
+	protected:
+		virtual HRESULT Init(const COMPONENT_INIT_DESC* desc) override;
 	public:
 		ID3D11ShaderResourceView* GetTexture() const
 		{
 			return mTexture;
 		}
+	public:
+		static SharedPtr<Texture> Create(const COMPONENT_INIT_DESC* desc = nullptr);
 	};
 }
