@@ -21,7 +21,7 @@ namespace CLIENT
 		virtual void Init() override;
 	public:
 		matrix GetMatrix(STATE state);
-		void   SetMatrix(STATE state, const matrix& matrix);
+		void   SetMatrix(STATE state, const matrix matrix);
 	};
 }
 

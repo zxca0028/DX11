@@ -1,5 +1,5 @@
 #pragma once
-#pragma warning(disable : 4005 4819 4101 4305 4996 4715)
+#pragma warning(disable : 4005 4819 4101 4305 4996 4715 26498)
 
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "d3d12.lib")
@@ -14,6 +14,9 @@ using namespace Microsoft::WRL;
 namespace CLIENT
 {
 #define DIRECTINPUT_VERSION 0x0800
+
+#define PI 3.14159f
+#define ToRadian(degree) degree * PI / 180.f
 
 #ifdef _DEBUG
 #define _CRTDBG_MAP_ALLOC

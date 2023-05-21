@@ -22,18 +22,21 @@ namespace CLIENT
 		}
 	}
 
-	void Pipeline::SetMatrix(STATE state, const matrix& matrix)
+	void Pipeline::SetMatrix(STATE state, const matrix matrix)
 	{
 		switch (state)
 		{
 		case STATE::VIEW:
 			mViewMatrix = matrix;
+			break;
 
 		case STATE::PROJ:
 			mProjMatrix = matrix;
+			break;
 
 		case STATE::ORTH:
 			mOrthoMatrix = matrix;
+			break;
 		}
 	}
 }

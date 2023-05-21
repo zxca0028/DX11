@@ -49,8 +49,10 @@ namespace CLIENT
 		worldMatrix._42 = mInitDesc.position.y;
 		worldMatrix._43 = mInitDesc.position.z;
 
-		matrix projMatrix;  GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::PROJ);
-		matrix viewMatrix;  GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::VIEW);
+		matrix projMatrix=  GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::PROJ);
+
+
+		matrix viewMatrix=  GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::VIEW);
 
 		mRect->Render();
 		mShader->Render(context, indexCount, worldMatrix, viewMatrix, projMatrix, srv);

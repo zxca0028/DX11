@@ -15,7 +15,7 @@ namespace CLIENT
             mTransform = Transform::Create(&transformInitDesc);
         }
 
-        f32 fieldOfView = 3.14 / 4.0f;
+        f32 fieldOfView  = ToRadian(15.f);
         f32 screenAspect = (f32)gScreenWidth / (f32)gScreenHeight;
 
         matrix projMatrix = matrix::Convert(XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, 0.1f, 1000.0f));
@@ -29,9 +29,11 @@ namespace CLIENT
     void CLIENT::Camera::Update()
     {
         vector3 vUp     = mTransform->GetState(Transform::STATE::UP);
-        vector3 vLookAt = mTransform->GetState(Transform::STATE::LOOK);
+        vector3 vLookAt = vector3(0.0f, 0.0f, 0.0f);
 
-        GlobalInstance::Instance<Pipeline>()->SetMatrix(Pipeline::STATE::VIEW,mTransform->GetWorldMatrixInv());
+        matrix viewMatrix = matrix::Convert(XMMatrixLookAtLH(mTransform->GetState(Transform::STATE::POSITION).GetSIMD(), vLookAt.GetSIMD(), vUp.GetSIMD()));
+
+        GlobalInstance::Instance<Pipeline>()->SetMatrix(Pipeline::STATE::VIEW, viewMatrix);
 
         /*vector3 vUp = vector3(0.0f, 1.0f, 0.0f);
         vector3 vLookAt = vector3(0.0f, 0.0f, 1.0f);
