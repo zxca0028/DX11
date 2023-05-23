@@ -14,81 +14,85 @@ namespace CLIENT
 
 	vector3 Transform::GetState(STATE state)
 	{
-		switch (state)
-		{
-		case STATE::RIGHT:
-			return vector3(mWorldMatrix._11, mWorldMatrix._12, mWorldMatrix._13);
-
-		case STATE::UP:
-			return vector3(mWorldMatrix._21, mWorldMatrix._22, mWorldMatrix._23);
-
-		case STATE::LOOK:
-			return vector3(mWorldMatrix._31, mWorldMatrix._32, mWorldMatrix._33);
-
-		case STATE::POSITION:
-			return vector3(mWorldMatrix._41, mWorldMatrix._42, mWorldMatrix._43);
-		}
+		return *(vector3*)(&mWorldMatrix[(i32)state]);
 	}
 
 	void Transform::SetState(STATE state, vector3 v)
 	{
-		switch (state)
-		{
-		case STATE::RIGHT:
-			mWorldMatrix._11 = v.x; mWorldMatrix._12 = v.y; mWorldMatrix._13 = v.z;
-
-		case STATE::UP:
-			mWorldMatrix._21 = v.x; mWorldMatrix._22 = v.y; mWorldMatrix._23 = v.z;
-
-		case STATE::LOOK:
-			mWorldMatrix._31 = v.x; mWorldMatrix._32 = v.y; mWorldMatrix._33 = v.z;
-
-		case STATE::POSITION:
-			mWorldMatrix._41 = v.x; mWorldMatrix._42 = v.y; mWorldMatrix._43 = v.z;
-		}
+		memcpy(&mWorldMatrix[(i32)state], &v, sizeof(vector3));
 	}
 
-	void Transform::Move()
+	void Transform::Move(f32 deltaTime)
 	{
-		//mWorldMatrix._43 += 0.01f;
-		mWorldMatrix._41 += GetState(STATE::LOOK).x * 0.01f;
-		mWorldMatrix._42 += GetState(STATE::LOOK).y * 0.01f;
-		mWorldMatrix._43 += GetState(STATE::LOOK).z * 0.01f;
+		vector3 vPos  = GetState(STATE::POSITION);
+		vector3 vLook = vector3::Normalize(GetState(STATE::LOOK));
+
+		vPos += vLook * deltaTime;
+
+		SetState(STATE::POSITION, vPos);
 	}
 
-	void Transform::Back()
+	void Transform::Back(f32 deltaTime)
 	{
-		mWorldMatrix._41 -= GetState(STATE::LOOK).x * 0.01f;
-		mWorldMatrix._42 -= GetState(STATE::LOOK).y * 0.01f;
-		mWorldMatrix._43 -= GetState(STATE::LOOK).z * 0.01f;
+		vector3 vPos  = GetState(STATE::POSITION);
+		vector3 vLook = vector3::Normalize(GetState(STATE::LOOK));
+
+		vPos -= vLook * deltaTime;
+
+		SetState(STATE::POSITION, vPos);
 	}
 
-	void Transform::Left()
+	void Transform::Left(f32 deltaTime)
 	{
-		mWorldMatrix._41 -= GetState(STATE::RIGHT).x * 0.01f;
-		mWorldMatrix._42 -= GetState(STATE::RIGHT).y * 0.01f;
-		mWorldMatrix._43 -= GetState(STATE::RIGHT).z * 0.01f;
+		vector3 vPos  = GetState(STATE::POSITION);
+		vector3 vLook = vector3::Normalize(GetState(STATE::RIGHT));
+
+		vPos -= vLook * deltaTime;
+
+		SetState(STATE::POSITION, vPos);
 	}
 
-	void Transform::Right()
+	void Transform::Right(f32 deltaTime)
 	{
-		mWorldMatrix._41 += GetState(STATE::RIGHT).x * 0.01f;
-		mWorldMatrix._42 += GetState(STATE::RIGHT).y * 0.01f;
-		mWorldMatrix._43 += GetState(STATE::RIGHT).z * 0.01f;
+		vector3 vPos  = GetState(STATE::POSITION);
+		vector3 vLook = vector3::Normalize(GetState(STATE::RIGHT));
+
+		vPos += vLook * deltaTime;
+
+		SetState(STATE::POSITION, vPos);
 	}
 
-	void Transform::Up()
+	void Transform::Up(f32 deltaTime)
 	{
-		mWorldMatrix._41 += GetState(STATE::UP).x * 0.01f;
-		mWorldMatrix._42 += GetState(STATE::UP).y * 0.01f;
-		mWorldMatrix._43 += GetState(STATE::UP).z * 0.01f;
+		vector3 vPos  = GetState(STATE::POSITION);
+		vector3 vLook = vector3::Normalize(GetState(STATE::UP));
+
+		vPos += vLook * deltaTime;
+
+		SetState(STATE::POSITION, vPos);
 	}
 
-	void Transform::Down()
+	void Transform::Down(f32 deltaTime)
 	{
-		mWorldMatrix._41 -= GetState(STATE::UP).x * 0.01f;
-		mWorldMatrix._42 -= GetState(STATE::UP).y * 0.01f;
-		mWorldMatrix._43 -= GetState(STATE::UP).z * 0.01f;
+		vector3 vPos  = GetState(STATE::POSITION);
+		vector3 vLook = vector3::Normalize(GetState(STATE::UP));
+
+		vPos -= vLook * deltaTime;
+
+		SetState(STATE::POSITION, vPos);
+	}
+
+	void Transform::RotationAxis(vector3 axis, f32 delta)
+	{
+		vector3 vRight = GetState(STATE::RIGHT);
+		vector3 vUp    = GetState(STATE::UP);
+		vector3 vLook  = GetState(STATE::LOOK);
+
+		matrix rotationMatrix = matrix::Convert(XMMatrixRotationAxis(vector3::GetSIMD(axis), delta));
+
+		SetState(STATE::RIGHT, vector3::Convert(XMVector3TransformNormal(vector3::GetSIMD(vRight), matrix::GetSIMD(rotationMatrix))));
+		SetState(STATE::UP,    vector3::Convert(XMVector3TransformNormal(vector3::GetSIMD(vUp),    matrix::GetSIMD(rotationMatrix))));
+		SetState(STATE::LOOK,  vector3::Convert(XMVector3TransformNormal(vector3::GetSIMD(vLook),  matrix::GetSIMD(rotationMatrix))));
 	}
 
 	SharedPtr<Transform> Transform::Create(const COMPONENT_INIT_DESC* desc)

@@ -37,11 +37,28 @@ namespace CLIENT
 			  _41(m._41), _42(m._42), _43(m._43), _44(m._44)
 		{}
 	public:
-		XMMATRIX GetSIMD()
+		inline float& operator [] (int index)
 		{
-			XMFLOAT4X4 m = XMFLOAT4X4(_11, _12, _13, _14, _21, _22, _23, _24, _31, _32, _33, _34, _41, _42, _43, _44);
+			switch (index)
+			{
+			case 0:
+				return _11;
+			case 1:
+				return _21;
+			case 2:
+				return _31;
+			case 3:
+				return _41;
+			default:
+				return _11;
+			}
+		}
+	public:
+		inline static XMMATRIX GetSIMD(const matrix& m)
+		{
+			XMFLOAT4X4 xm(m._11, m._12, m._13, m._14, m._21, m._22, m._23, m._24, m._31, m._32, m._33, m._34, m._41, m._42, m._43, m._44);
 
-			return XMLoadFloat4x4(&m);
+			return XMLoadFloat4x4(&xm);
 		}
 	public:
 		inline static matrix Convert(XMMATRIX xm)
@@ -54,7 +71,7 @@ namespace CLIENT
 		}
 		inline static matrix Inverse(matrix m)
 		{
-			return matrix::Convert(XMMatrixInverse(nullptr, m.GetSIMD()));
+			return matrix::Convert(XMMatrixInverse(nullptr, GetSIMD(m)));
 		}
 	};
 }

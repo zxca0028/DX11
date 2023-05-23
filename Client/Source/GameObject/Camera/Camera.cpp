@@ -32,52 +32,37 @@ namespace CLIENT
     {
         if (GlobalInstance::Instance<Input>()->KeyInput(DIK_W))
         {
-            mTransform->Move();
+            mTransform->Move(0.001f);
         }
         if (GlobalInstance::Instance<Input>()->KeyInput(DIK_S))
         {
-            mTransform->Back();
+            mTransform->Back(0.001f);
         }
         if (GlobalInstance::Instance<Input>()->KeyInput(DIK_A))
         {
-            mTransform->Left();
+            mTransform->Left(0.001f);
         }
         if (GlobalInstance::Instance<Input>()->KeyInput(DIK_D))
         {
-            mTransform->Right();
+            mTransform->Right(0.001f);
         }
         if (GlobalInstance::Instance<Input>()->KeyInput(DIK_UPARROW))
         {
-            mTransform->Up();
+            mTransform->Up(0.001f);
         }
         if (GlobalInstance::Instance<Input>()->KeyInput(DIK_DOWNARROW))
         {
-            mTransform->Down();
+            mTransform->Down(0.001f);
         }
 
-        
+        //POINT pos = { gScreenWidth / 2, gScreenHeight / 2 };
+        //ClientToScreen(ghWnd, &pos);
+        //SetCursorPos(pos.x, pos.y);
 
-        i32 dx, dy;
-        GlobalInstance::Instance<Input>()->MouseInput(dx, dy);
+        mTransform->RotationAxis(vector3::Y(), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::X) * 0.001f);
+        mTransform->RotationAxis(mTransform->GetState(Transform::STATE::RIGHT), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::Y) * 0.001f);
 
-
-        vector3 vAxisY = vector3(0.0f, 1.0f, 0.0f);
-        vector3 vAxisX = mTransform->GetState(Transform::STATE::RIGHT);
-        
-
-        matrix rotateMatrix1 = matrix::Convert(XMMatrixRotationAxis(vAxisY.GetSIMD(), dx * 0.001f));
-        matrix rotateMatrix2 = matrix::Convert(XMMatrixRotationAxis(vAxisX.GetSIMD(), dy * 0.001f));
-
-        matrix m1 = matrix::Convert(XMMatrixMultiply(mTransform->GetWorldMatrix().GetSIMD(), rotateMatrix1.GetSIMD()));
-        matrix m2 = matrix::Convert(XMMatrixMultiply(m1.GetSIMD(), rotateMatrix2.GetSIMD()));
-
-        mTransform->SetWorldMatrix(m2);
-
-        vector3 vUp     = mTransform->GetState(Transform::STATE::UP);
-        vector3 vLookAt = mTransform->GetState(Transform::STATE::POSITION) + mTransform->GetState(Transform::STATE::LOOK);
-
-        matrix viewMatrix = matrix::Convert(XMMatrixLookAtLH(mTransform->GetState(Transform::STATE::POSITION).GetSIMD(), vLookAt.GetSIMD(), vUp.GetSIMD()));
-
+        matrix viewMatrix = mTransform->GetWorldMatrixInv();
         GlobalInstance::Instance<Pipeline>()->SetMatrix(Pipeline::STATE::VIEW, viewMatrix);
     }
 

@@ -37,12 +37,14 @@ namespace CLIENT
 		vector3 GetState(STATE state);
 		void    SetState(STATE state, vector3 v);
 	public:
-		void Move();
-		void Back();
-		void Left();
-		void Right();
-		void Up();
-		void Down();
+		void Move(f32 deltaTime);
+		void Back(f32 deltaTime);
+		void Left(f32 deltaTime);
+		void Right(f32 deltaTime);
+		void Up(f32 deltaTime);
+		void Down(f32 deltaTime);
+	public:
+		void RotationAxis(vector3 axis, f32 delta);
 	public:
 		static SharedPtr<Transform> Create(const COMPONENT_INIT_DESC* desc = nullptr);
 	};

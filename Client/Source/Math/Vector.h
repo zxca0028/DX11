@@ -46,12 +46,38 @@ namespace CLIENT
 		{
 			return vector3(x + v.x, y + v.y, z + v.z);
 		}
-	public:
-		XMVECTOR GetSIMD()
+		inline vector3 operator * (float mul) const
 		{
-			XMFLOAT3 v = XMFLOAT3(x, y, z);
+			return vector3(x * mul, y * mul, z * mul);
+		}
+		inline vector3& operator += (const vector3& v)
+		{
+			x += v.x; y += v.y; z += v.z; return *this;
+		}
+		inline vector3& operator -= (const vector3& v)
+		{
+			x -= v.x; y -= v.y; z -= v.z; return *this;
+		}
+		inline float& operator [] (int index)
+		{
+			switch (index)
+			{
+			case 0:
+				return x;
+			case 1:
+				return y;
+			case 2:
+				return z;
+			default:
+				return x;
+			}
+		}
+	public:
+		inline static XMVECTOR GetSIMD(const vector3& v)
+		{
+			XMFLOAT3 v3(v.x, v.y, v.z);
 
-			return XMLoadFloat3(&v);
+			return XMLoadFloat3(&v3);
 		}
 	public:
 		inline static vector3 Convert(XMVECTOR xv)
@@ -59,6 +85,22 @@ namespace CLIENT
 			XMFLOAT3 v;	XMStoreFloat3(&v, xv);
 
 			return vector3(v);
+		}
+		inline static vector3 Normalize(const vector3& v)
+		{
+			return Convert(XMVector3Normalize(GetSIMD(v)));
+		}
+		inline static vector3 X()
+		{
+			return vector3(1.0f, 0.0f, 0.0f);
+		}
+		inline static vector3 Y()
+		{
+			return vector3(0.0f, 1.0f, 0.0f);
+		}
+		inline static vector3 Z()
+		{
+			return vector3(0.0f, 0.0f, 1.0f);
 		}
 	};
 

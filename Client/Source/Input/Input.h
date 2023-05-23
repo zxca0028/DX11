@@ -6,6 +6,13 @@ namespace CLIENT
 {
 	class Input final : public ISingleton
 	{
+	public:
+		enum class STATE
+		{
+			X,
+			Y,
+			WHEEL
+		};
 	private:
 		IDirectInput8*       mDirectInput = nullptr;
 		IDirectInputDevice8* mKeyboard    = nullptr;
@@ -26,7 +33,7 @@ namespace CLIENT
 		void GetMouseLocation(i32& x, i32& y);
 	public:
 		bool KeyInput(int keyCode);
-		void MouseInput(i32& dx, i32& dy);
+		i32  MouseInput(STATE state);
 	private:
 		void ReadKeyboard();
 		void ReadMouse();

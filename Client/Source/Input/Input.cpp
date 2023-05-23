@@ -50,10 +50,22 @@ namespace CLIENT
 		return false;
 	}
 
-	void Input::MouseInput(i32& dx, i32& dy)
+	i32 Input::MouseInput(STATE state)
 	{
-		dx = mMouseState.lX;
-		dy = mMouseState.lY;
+		switch (state)
+		{
+		case CLIENT::Input::STATE::X:
+			return mMouseState.lX;
+
+		case CLIENT::Input::STATE::Y:
+			return mMouseState.lY;
+
+		case CLIENT::Input::STATE::WHEEL:
+			return mMouseState.lZ;
+
+		default:
+			break;
+		}
 	}
 
 	void CLIENT::Input::ReadKeyboard()

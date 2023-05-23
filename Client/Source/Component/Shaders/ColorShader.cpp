@@ -84,9 +84,9 @@ namespace CLIENT
 
 		MatrixBufferType* dataPtr = (MatrixBufferType*)mappedResource.pData;
 
-		dataPtr->worldMatrix = matrix::Convert(XMMatrixTranspose(worldMatrix.GetSIMD()));
-		dataPtr->viewMatrix  = matrix::Convert(XMMatrixTranspose(viewMatrix.GetSIMD()));
-		dataPtr->projMatrix  = matrix::Convert(XMMatrixTranspose(projMatrix.GetSIMD()));
+		dataPtr->worldMatrix = matrix::Convert(XMMatrixTranspose(matrix::GetSIMD(worldMatrix)));
+		dataPtr->viewMatrix  = matrix::Convert(XMMatrixTranspose(matrix::GetSIMD(viewMatrix)));
+		dataPtr->projMatrix  = matrix::Convert(XMMatrixTranspose(matrix::GetSIMD(projMatrix)));
 
 		context->Unmap(mMatrixBuffer, 0);
 
