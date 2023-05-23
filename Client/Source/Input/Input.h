@@ -25,10 +25,8 @@ namespace CLIENT
 		bool IsEscapePressed();
 		void GetMouseLocation(i32& x, i32& y);
 	public:
-		bool W();
-		bool A();
-		bool S();
-		bool D();
+		bool KeyInput(int keyCode);
+		void MouseInput(i32& dx, i32& dy);
 	private:
 		void ReadKeyboard();
 		void ReadMouse();

@@ -37,12 +37,12 @@ namespace CLIENT
 
 	void CLIENT::Input::GetMouseLocation(i32& x, i32& y)
 	{
-
+		
 	}
 
-	bool Input::W()
+	bool Input::KeyInput(int keyCode)
 	{
-		if (mKeyboardState[DIK_W] & 0x80)
+		if (mKeyboardState[keyCode] & 0x80)
 		{
 			return true;
 		}
@@ -50,34 +50,10 @@ namespace CLIENT
 		return false;
 	}
 
-	bool Input::A()
+	void Input::MouseInput(i32& dx, i32& dy)
 	{
-		if (mKeyboardState[DIK_A] & 0x80)
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	bool Input::S()
-	{
-		if (mKeyboardState[DIK_S] & 0x80)
-		{
-			return true;
-		}
-
-		return false;
-	}
-
-	bool Input::D()
-	{
-		if (mKeyboardState[DIK_D] & 0x80)
-		{
-			return true;
-		}
-
-		return false;
+		dx = mMouseState.lX;
+		dy = mMouseState.lY;
 	}
 
 	void CLIENT::Input::ReadKeyboard()

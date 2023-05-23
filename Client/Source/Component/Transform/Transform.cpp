@@ -48,6 +48,49 @@ namespace CLIENT
 		}
 	}
 
+	void Transform::Move()
+	{
+		//mWorldMatrix._43 += 0.01f;
+		mWorldMatrix._41 += GetState(STATE::LOOK).x * 0.01f;
+		mWorldMatrix._42 += GetState(STATE::LOOK).y * 0.01f;
+		mWorldMatrix._43 += GetState(STATE::LOOK).z * 0.01f;
+	}
+
+	void Transform::Back()
+	{
+		mWorldMatrix._41 -= GetState(STATE::LOOK).x * 0.01f;
+		mWorldMatrix._42 -= GetState(STATE::LOOK).y * 0.01f;
+		mWorldMatrix._43 -= GetState(STATE::LOOK).z * 0.01f;
+	}
+
+	void Transform::Left()
+	{
+		mWorldMatrix._41 -= GetState(STATE::RIGHT).x * 0.01f;
+		mWorldMatrix._42 -= GetState(STATE::RIGHT).y * 0.01f;
+		mWorldMatrix._43 -= GetState(STATE::RIGHT).z * 0.01f;
+	}
+
+	void Transform::Right()
+	{
+		mWorldMatrix._41 += GetState(STATE::RIGHT).x * 0.01f;
+		mWorldMatrix._42 += GetState(STATE::RIGHT).y * 0.01f;
+		mWorldMatrix._43 += GetState(STATE::RIGHT).z * 0.01f;
+	}
+
+	void Transform::Up()
+	{
+		mWorldMatrix._41 += GetState(STATE::UP).x * 0.01f;
+		mWorldMatrix._42 += GetState(STATE::UP).y * 0.01f;
+		mWorldMatrix._43 += GetState(STATE::UP).z * 0.01f;
+	}
+
+	void Transform::Down()
+	{
+		mWorldMatrix._41 -= GetState(STATE::UP).x * 0.01f;
+		mWorldMatrix._42 -= GetState(STATE::UP).y * 0.01f;
+		mWorldMatrix._43 -= GetState(STATE::UP).z * 0.01f;
+	}
+
 	SharedPtr<Transform> Transform::Create(const COMPONENT_INIT_DESC* desc)
 	{
 		auto component = CreateSharedPtr<Transform>();
