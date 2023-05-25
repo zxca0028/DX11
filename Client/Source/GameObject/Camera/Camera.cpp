@@ -16,7 +16,7 @@ namespace CLIENT
             mTransform = Transform::Create(&transformInitDesc);
         }
 
-        f32 fieldOfView  = ToRadian(15.f);
+        f32 fieldOfView  = ToRadian(45.f);
         f32 screenAspect = (f32)gScreenWidth / (f32)gScreenHeight;
 
         matrix projMatrix = matrix::Convert(XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, 0.1f, 1000.0f));
@@ -59,8 +59,8 @@ namespace CLIENT
         //ClientToScreen(ghWnd, &pos);
         //SetCursorPos(pos.x, pos.y);
 
-        mTransform->RotationAxis(vector3::Y(), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::X) * 0.001f);
-        mTransform->RotationAxis(mTransform->GetState(Transform::STATE::RIGHT), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::Y) * 0.001f);
+        //mTransform->RotationAxis(vector3::Y(), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::X) * 0.001f);
+        //mTransform->RotationAxis(mTransform->GetState(Transform::STATE::RIGHT), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::Y) * 0.001f);
 
         matrix viewMatrix = mTransform->GetWorldMatrixInv();
         GlobalInstance::Instance<Pipeline>()->SetMatrix(Pipeline::STATE::VIEW, viewMatrix);

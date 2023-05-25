@@ -42,18 +42,9 @@ namespace CLIENT
 			return mDeviceContext.Get();
 		}
 	public:
-		void GetProjMatrix(matrix& proj)
-		{
-			proj = mProj;
-		}
-		void GetWorldMatrix(matrix& world)
-		{
-			world = mWorld;
-		}
-		void GetOrthoMatrix(matrix& ortho)
-		{
-			ortho = mOrtho;
-		}
+		void ClearRenderTarget();
+		void CreateRenderTarget(u32 width, u32 hegiht);
+		void ResizeBuffer(u32 bufferCount, u32 width, u32 height, DXGI_FORMAT newFormat, u32 swapChainFlags);
 	public:
 		void GetVideoCardInfo(char* cardName, int& memory)
 		{

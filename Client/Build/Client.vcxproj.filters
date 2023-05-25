@@ -209,11 +209,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Client.rc">
-      <Filter>Global</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <FxCompile Include="..\Source\Component\Shaders\HLSL\Color.hlsl">
       <Filter>Component\Shaders\HLSL</Filter>
     </FxCompile>

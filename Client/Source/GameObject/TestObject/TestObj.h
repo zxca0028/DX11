@@ -10,6 +10,7 @@ namespace CLIENT
 		SharedPtr<class Rect>          mRect;
 		SharedPtr<class Texture>       mTexture;
 		SharedPtr<class TextureShader> mShader;
+		SharedPtr<class Transform>     mTransform;
 	public:
 		virtual ~TestObj() = default;
 	public:

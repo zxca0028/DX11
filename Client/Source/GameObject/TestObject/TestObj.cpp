@@ -7,6 +7,7 @@
 #include "Component/Geometry/Rect.h"
 #include "Component/Texture/Texture.h"
 #include "Component/Shaders/TextureShader.h"
+#include "Component/Transform/Transform.h"
 
 namespace CLIENT
 {
@@ -30,6 +31,12 @@ namespace CLIENT
 			mShader = TextureShader::Create(&shaderInitDesc);
 		}
 
+		Component::COMPONENT_INIT_DESC transformInitDesc;
+		{
+			transformInitDesc.position = mInitDesc.position;
+			mTransform = Transform::Create(&transformInitDesc);
+		}
+
 		return S_OK;
 	}
 
@@ -43,16 +50,9 @@ namespace CLIENT
 		auto indexCount = mRect->GetIndexCount();
 		auto srv        = mTexture->GetTexture();
 
-		matrix worldMatrix; GlobalInstance::Instance<D3D>()->GetWorldMatrix(worldMatrix);
-		
-		worldMatrix._41 = mInitDesc.position.x;
-		worldMatrix._42 = mInitDesc.position.y;
-		worldMatrix._43 = mInitDesc.position.z;
-
-		matrix projMatrix=  GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::PROJ);
-
-
-		matrix viewMatrix=  GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::VIEW);
+		matrix worldMatrix = mTransform->GetWorldMatrix();
+		matrix projMatrix  = GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::PROJ);
+		matrix viewMatrix  = GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::VIEW);
 
 		mRect->Render();
 		mShader->Render(context, indexCount, worldMatrix, viewMatrix, projMatrix, srv);

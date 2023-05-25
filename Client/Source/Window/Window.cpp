@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Window.h"
 #include "Input/Input.h"
+#include "DirectX11/D3D.h"
+
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace CLIENT
 {
@@ -8,6 +11,11 @@ namespace CLIENT
 
 	LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
+		if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+		{
+			return true;
+		}
+
 		/*for (auto& callBack : Window::mCallBack)
 		{
 			LRESULT result = callBack(hWnd, msg, wParam, lParam);
@@ -15,15 +23,26 @@ namespace CLIENT
 			{
 				return result;
 			}
-		}
+		}*/
 
 		switch (msg)
 		{
 		case WM_KEYDOWN:
+			return 0;
+
+		case WM_SIZE:
+			if (wParam == SIZE_MINIMIZED)
+			{
+				return 0;
+			}
+			gResizeWidth  = (UINT)LOWORD(lParam);
+			gResizeHeight = (UINT)HIWORD(lParam);
+			return 0;
+
 		case WM_DESTROY:
 			::PostQuitMessage(0);
 			break;
-		}*/
+		}
 		return ::DefWindowProc(hWnd, msg, wParam, lParam);
 	}
 
@@ -96,6 +115,18 @@ namespace CLIENT
 			{
 				return false;
 			}
+		}
+
+		if (gResizeWidth != 0 && gResizeHeight != 0)
+		{
+			GlobalInstance::Instance<D3D>()->ClearRenderTarget();
+			GlobalInstance::Instance<D3D>()->ResizeBuffer(0, gResizeWidth, gResizeHeight, DXGI_FORMAT_UNKNOWN, 0);
+
+			GlobalInstance::Instance<D3D>()->CreateRenderTarget(gResizeWidth, gResizeHeight);
+
+
+			gResizeWidth  = 0;
+			gResizeHeight = 0;
 		}
 
 		/*MSG msg;

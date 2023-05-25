@@ -80,6 +80,8 @@ namespace CLIENT
 
 	extern HINSTANCE ghInst;
 	extern HWND      ghWnd;
-	extern i32       gScreenWidth;
-	extern i32       gScreenHeight;
+	extern u32       gScreenWidth;
+	extern u32       gScreenHeight;
+	extern u32       gResizeWidth;
+	extern u32       gResizeHeight;
 }

@@ -13,7 +13,6 @@ namespace CLIENT
 		IDXGIAdapter*     adapter         = nullptr;
 		IDXGIOutput*      adapterOutput   = nullptr;
 		DXGI_MODE_DESC*   displayModeList = nullptr;
-		ID3D11Texture2D*  backBufferPtr   = nullptr;
 		DXGI_ADAPTER_DESC adapterDesc;
 
 		u32 numModes;
@@ -97,7 +96,10 @@ namespace CLIENT
 			
 			ThrowIfFailed(D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, &featureLevel, 1, D3D11_SDK_VERSION, &swapChainDesc, mSwapChain.GetAddressOf(), mDevice.GetAddressOf(), NULL, mDeviceContext.GetAddressOf()));
 
-			mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBufferPtr);
+			ID3D11Texture2D* backBufferPtr = nullptr;
+
+			//mSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBufferPtr);
+			mSwapChain->GetBuffer(0, IID_PPV_ARGS(&backBufferPtr));
 
 			ThrowIfFailed(mDevice->CreateRenderTargetView(backBufferPtr, NULL, mRenderTargetView.GetAddressOf()));
 
@@ -265,6 +267,8 @@ namespace CLIENT
 		color[2] = 0.0f;
 		color[3] = 0.0f;
 
+		mDeviceContext->OMSetRenderTargets(1, mRenderTargetView.GetAddressOf(), nullptr);
+
 		mDeviceContext->ClearRenderTargetView(mRenderTargetView.Get(), color);
 		mDeviceContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.f, 0);
 	}
@@ -272,5 +276,49 @@ namespace CLIENT
 	void CLIENT::D3D::EndScene()
 	{
 		mSwapChain->Present(0, 0);
+	}
+
+	void D3D::ClearRenderTarget()
+	{
+		if (mRenderTargetView)
+		{
+			mRenderTargetView->Release();
+		}
+	}
+
+	void D3D::CreateRenderTarget(u32 width, u32 height)
+	{
+		ID3D11Texture2D* backBufferPtr;
+
+		mSwapChain->GetBuffer(0, IID_PPV_ARGS(&backBufferPtr));
+
+		mDevice->CreateRenderTargetView(backBufferPtr, nullptr, mRenderTargetView.GetAddressOf());
+
+		backBufferPtr->Release();
+		backBufferPtr = 0;
+
+		/*D3D11_TEXTURE2D_DESC depthBufferDesc;
+		{
+			ZeroMemory(&depthBufferDesc, sizeof(depthBufferDesc));
+
+			depthBufferDesc.Width              = width;
+			depthBufferDesc.Height             = height;
+			depthBufferDesc.MipLevels          = 1;
+			depthBufferDesc.ArraySize          = 1;
+			depthBufferDesc.Format             = DXGI_FORMAT_D24_UNORM_S8_UINT;
+			depthBufferDesc.SampleDesc.Count   = 1;
+			depthBufferDesc.SampleDesc.Quality = 0;
+			depthBufferDesc.Usage              = D3D11_USAGE_DEFAULT;
+			depthBufferDesc.BindFlags          = D3D11_BIND_DEPTH_STENCIL;
+			depthBufferDesc.CPUAccessFlags     = 0;
+			depthBufferDesc.MiscFlags          = 0;
+
+			ThrowIfFailed(mDevice->CreateTexture2D(&depthBufferDesc, NULL, mDepthStencilBuffer.GetAddressOf()));
+		}*/
+	}
+
+	void D3D::ResizeBuffer(u32 bufferCount, u32 width, u32 height, DXGI_FORMAT newFormat, u32 swapChainFlags)
+	{
+		mSwapChain->ResizeBuffers(bufferCount, width, height, newFormat, swapChainFlags);
 	}
 }
