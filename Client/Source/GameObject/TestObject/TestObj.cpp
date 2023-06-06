@@ -9,6 +9,9 @@
 #include "Component/Shaders/TextureShader.h"
 #include "Component/Transform/Transform.h"
 
+#include "Component/Light/Light.h"
+#include "Component/Shaders/LightShader.h"
+
 namespace CLIENT
 {
 	HRESULT CLIENT::TestObj::Init(const OBJECT_INIT_DESC* desc)
@@ -28,7 +31,7 @@ namespace CLIENT
 		{
 			shaderInitDesc.path = mInitDesc.shader;
 
-			mShader = TextureShader::Create(&shaderInitDesc);
+			mShader = LightShader::Create(&shaderInitDesc);
 		}
 
 		Component::COMPONENT_INIT_DESC transformInitDesc;

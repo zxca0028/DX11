@@ -27,7 +27,6 @@ namespace CLIENT
 		compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
 #endif
 
-		HRESULT result;
 		wstring shaderDirectory = L"../Source/Component/Shaders/HLSL/" + mInitDesc.path;
 
 		ComPtr<ID3DBlob> errorMessage;
@@ -101,11 +100,11 @@ namespace CLIENT
 
 		ThrowIfFailed(context->Map(mMatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 
-		MatrixBufferType* dataPtr = (MatrixBufferType*)mappedResource.pData;
+		MatrixBufferType* matrixDataPtr = (MatrixBufferType*)mappedResource.pData;
 
-		dataPtr->worldMatrix = matrix::Convert(XMMatrixTranspose(matrix::GetSIMD(worldMatrix)));
-		dataPtr->viewMatrix  = matrix::Convert(XMMatrixTranspose(matrix::GetSIMD(viewMatrix)));
-		dataPtr->projMatrix  = matrix::Convert(XMMatrixTranspose(matrix::GetSIMD(projMatrix)));
+		matrixDataPtr->worldMatrix = matrix::Convert(XMMatrixTranspose(matrix::GetSIMD(worldMatrix)));
+		matrixDataPtr->viewMatrix  = matrix::Convert(XMMatrixTranspose(matrix::GetSIMD(viewMatrix)));
+		matrixDataPtr->projMatrix  = matrix::Convert(XMMatrixTranspose(matrix::GetSIMD(projMatrix)));
 
 		context->Unmap(mMatrixBuffer, 0);
 

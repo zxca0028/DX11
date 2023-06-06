@@ -25,15 +25,19 @@ namespace CLIENT
 		{
 			vertices[0].position = vector3(-0.5f, 0.5f, 0.0f);
 			vertices[0].texture  = vector2(0.0f, 0.0f);
+			vertices[0].normal   = vector3(0.0f, 0.0f, -1.0f);
 
 			vertices[1].position = vector3(0.5f, 0.5f, 0.0f);
 			vertices[1].texture  = vector2(1.0f, 0.0f);
+			vertices[1].normal   = vector3(0.0f, 0.0f, -1.0f);
 
 			vertices[2].position = vector3(0.5f, -0.5f, 0.0f);
 			vertices[2].texture  = vector2(1.0f, 1.0f);
+			vertices[2].normal   = vector3(0.0f, 0.0f, -1.0f);
 
 			vertices[3].position = vector3(-0.5f, -0.5f, 0.0f);
 			vertices[3].texture  = vector2(0.0f, 1.0f);
+			vertices[3].normal   = vector3(0.0f, 0.0f, -1.0f);
 		}
 
 		u32* indices = new u32[mIndexCount];

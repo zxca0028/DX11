@@ -9,8 +9,8 @@ namespace CLIENT
 	private:
 		SharedPtr<class Rect>          mRect;
 		SharedPtr<class Texture>       mTexture;
-		SharedPtr<class TextureShader> mShader;
 		SharedPtr<class Transform>     mTransform;
+		SharedPtr<class LightShader>   mShader;
 	public:
 		virtual ~TestObj() = default;
 	public:

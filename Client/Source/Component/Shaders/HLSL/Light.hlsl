@@ -24,7 +24,7 @@ PixelInputType LightVertexShader(VertexInputType input)
 {
 	PixelInputType output;
 
-	input.position.w = 0.0f;
+	input.position.w = 1.0f;
 
 	output.position = mul(input.position, worldMatrix);
 	output.position = mul(output.position, viewMatrix);
@@ -63,7 +63,7 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 
 	color = saturate(diffuseColor * lightIntensity);
 
-	color = color * textureColor;
+	color = textureColor * color;
 	
 	return color;
 }

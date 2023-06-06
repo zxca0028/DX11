@@ -53,6 +53,9 @@
     <Filter Include="GameObject\Camera">
       <UniqueIdentifier>{8bd6ed69-a495-4d19-86bc-7047ca5ab88e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ClientUI">
+      <UniqueIdentifier>{652def7a-3b61-416c-ad4c-f21c379b6656}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
@@ -119,6 +122,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\Global\Pipeline.cpp">
       <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ClientUI\ClientUI.cpp">
+      <Filter>ClientUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Component\Light\Light.cpp">
+      <Filter>Component\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +215,12 @@
     </ClInclude>
     <ClInclude Include="..\Source\Global\Pipeline.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\ClientUI\ClientUI.h">
+      <Filter>ClientUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Light\Light.h">
+      <Filter>Component\Light</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4428,7 +4428,7 @@ void ImGui::UpdateMouseMovingWindowEndFrame()
     ImGuiContext& g = *GImGui;
     if (g.ActiveId != 0 || g.HoveredId != 0)
         return;
-
+    
     // Unless we just made a window/popup appear
     if (g.NavWindow && g.NavWindow->Appearing)
         return;

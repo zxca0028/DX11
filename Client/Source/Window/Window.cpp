@@ -2,6 +2,8 @@
 #include "Window.h"
 #include "Input/Input.h"
 #include "DirectX11/D3D.h"
+#include "Global/GlobalInstance.h"
+#include "Global/Pipeline.h"
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -124,6 +126,14 @@ namespace CLIENT
 
 			GlobalInstance::Instance<D3D>()->CreateRenderTarget(gResizeWidth, gResizeHeight);
 
+			f32 fieldOfView  = ToRadian(45.f);
+			f32 screenAspect = (f32)gResizeWidth / (f32)gResizeHeight;
+
+			matrix projMatrix = matrix::Convert(XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, 0.1f, 1000.0f));
+			matrix orthMatrix = matrix::Convert(XMMatrixOrthographicLH((f32)gResizeWidth, (f32)gResizeHeight, 0.1f, 1000.0f));
+
+			GlobalInstance::Instance<Pipeline>()->SetMatrix(Pipeline::STATE::PROJ, projMatrix);
+			GlobalInstance::Instance<Pipeline>()->SetMatrix(Pipeline::STATE::ORTH, orthMatrix);
 
 			gResizeWidth  = 0;
 			gResizeHeight = 0;

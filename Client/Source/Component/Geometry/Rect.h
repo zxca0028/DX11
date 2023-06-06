@@ -11,6 +11,7 @@ namespace CLIENT
 		{
 			vector3 position;
 			vector2 texture;
+			vector3 normal;
 		};
 	public:
 		virtual ~Rect() = default;
