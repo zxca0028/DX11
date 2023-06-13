@@ -62,6 +62,7 @@ namespace CLIENT
 			vertexTexData.SysMemPitch      = 0;
 			vertexTexData.SysMemSlicePitch = 0;
 		}
+
 		ThrowIfFailed(GlobalInstance::Instance<D3D>()->GetDevice()->CreateBuffer(&vectexTexBufferDesc, &vertexTexData, &mVertexBuffer));
 
 		D3D11_BUFFER_DESC indexTexBufferDesc;

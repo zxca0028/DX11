@@ -18,7 +18,7 @@ namespace CLIENT
 
 	void CLIENT::LightShader::Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix, ID3D11ShaderResourceView* srv)
 	{
-		SetShaderParameter(context, worldMatrix, viewMatrix, projMatrix, srv, vector3(0.f,0.f,1.f),vector4(1.f,0.f,1.f,0.f));
+		SetShaderParameter(context, worldMatrix, viewMatrix, projMatrix, srv, vector3(0.f,0.f,1.f),vector4(1.f,1.f,1.f,0.f));
 
 		RenderShader(context, indexCount);
 	}

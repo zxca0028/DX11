@@ -117,14 +117,14 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>../Source;../../PlugIn;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Source;../../PlugIn;../../PlugIn/fbxSDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../PlugIn/DirectXTex;../Bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>DirectXTex.lib;ImGui.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../PlugIn/DirectXTex;../Bin;../../PlugIn/fbxSDK/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>DirectXTex.lib;ImGui.lib;libfbxsdk.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,6 +149,7 @@
     <ClCompile Include="..\Source\Application.cpp" />
     <ClCompile Include="..\Source\ClientUI\ClientUI.cpp" />
     <ClCompile Include="..\Source\Component\Component.cpp" />
+    <ClCompile Include="..\Source\Component\Geometry\Cube.cpp" />
     <ClCompile Include="..\Source\Component\Geometry\Geometry.cpp" />
     <ClCompile Include="..\Source\Component\Geometry\Rect.cpp" />
     <ClCompile Include="..\Source\Component\Light\Light.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="..\Source\ClientUI\ClientUI.h" />
     <ClInclude Include="..\Source\Common\Define.h" />
     <ClInclude Include="..\Source\Component\Component.h" />
+    <ClInclude Include="..\Source\Component\Geometry\Cube.h" />
     <ClInclude Include="..\Source\Component\Geometry\Geometry.h" />
     <ClInclude Include="..\Source\Component\Geometry\Rect.h" />
     <ClInclude Include="..\Source\Component\Light\Light.h" />

@@ -129,6 +129,9 @@
     <ClCompile Include="..\Source\Component\Light\Light.cpp">
       <Filter>Component\Light</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Component\Geometry\Cube.cpp">
+      <Filter>Component\Geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Source\Common\Define.h">
@@ -221,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="..\Source\Component\Light\Light.h">
       <Filter>Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Component\Geometry\Cube.h">
+      <Filter>Component\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

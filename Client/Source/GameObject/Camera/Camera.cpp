@@ -55,12 +55,12 @@ namespace CLIENT
             mTransform->Down(0.001f);
         }
 
-        //POINT pos = { gScreenWidth / 2, gScreenHeight / 2 };
-        //ClientToScreen(ghWnd, &pos);
-        //SetCursorPos(pos.x, pos.y);
+        POINT pos = { gScreenWidth / 2, gScreenHeight / 2 };
+        ClientToScreen(ghWnd, &pos);
+        SetCursorPos(pos.x, pos.y);
 
-        //mTransform->RotationAxis(vector3::Y(), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::X) * 0.001f);
-        //mTransform->RotationAxis(mTransform->GetState(Transform::STATE::RIGHT), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::Y) * 0.001f);
+        mTransform->RotationAxis(vector3::Y(), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::X) * 0.001f);
+        mTransform->RotationAxis(mTransform->GetState(Transform::STATE::RIGHT), GlobalInstance::Instance<Input>()->MouseInput(Input::STATE::Y) * 0.001f);
 
         matrix viewMatrix = mTransform->GetWorldMatrixInv();
         GlobalInstance::Instance<Pipeline>()->SetMatrix(Pipeline::STATE::VIEW, viewMatrix);

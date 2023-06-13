@@ -6,13 +6,6 @@ namespace CLIENT
 {
 	class Rect final : public Geometry
 	{
-	private:
-		struct VertexTexType
-		{
-			vector3 position;
-			vector2 texture;
-			vector3 normal;
-		};
 	public:
 		virtual ~Rect() = default;
 	public:

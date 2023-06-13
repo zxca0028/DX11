@@ -7,6 +7,13 @@ namespace CLIENT
 	class Geometry abstract : public Component
 	{
 	protected:
+		struct VertexTexType
+		{
+			vector3 position;
+			vector2 texture;
+			vector3 normal;
+		};
+	protected:
 		ID3D11Buffer* mVertexBuffer = nullptr;
 		ID3D11Buffer* mIndexBuffer  = nullptr;
 	protected:

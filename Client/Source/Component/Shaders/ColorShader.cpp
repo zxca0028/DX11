@@ -28,7 +28,7 @@ namespace CLIENT
 #endif
 
 		HRESULT result;
-		wstring shaderDirectory = L"../Source/Shaders/" + mInitDesc.path;
+		wstring shaderDirectory = L"../Source/Component/Shaders/HLSL/" + mInitDesc.path;
 
 		ComPtr<ID3DBlob> errorMessage;
 		ComPtr<ID3DBlob> vertexShaderBuffer;
