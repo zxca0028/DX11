@@ -18,7 +18,7 @@ namespace CLIENT
 
 	void CLIENT::LightShader::Render(ID3D11DeviceContext* context, i32 indexCount, matrix worldMatrix, matrix viewMatrix, matrix projMatrix, ID3D11ShaderResourceView* srv)
 	{
-		SetShaderParameter(context, worldMatrix, viewMatrix, projMatrix, srv, vector3(0.f,0.f,1.f),vector4(1.f,1.f,1.f,0.f));
+		SetShaderParameter(context, worldMatrix, viewMatrix, projMatrix, srv, vector3(1.f,0.f,1.f),vector4(0.f,0.f,1.f,1.f));
 
 		RenderShader(context, indexCount);
 	}
@@ -137,7 +137,7 @@ namespace CLIENT
 		context->PSSetShaderResources(0, 1, &srv);
 
 		ThrowIfFailed(context->Map(mLightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
-
+		
 		LightBufferType* lightDataPtr = (LightBufferType*)mappedResource.pData;
 
 		lightDataPtr->diffuseColor   = diffuseColor;

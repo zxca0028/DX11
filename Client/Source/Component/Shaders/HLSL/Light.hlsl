@@ -32,9 +32,7 @@ PixelInputType LightVertexShader(VertexInputType input)
 
 	output.tex = input.tex;
 
-	output.normal = mul(input.normal, (float3x3)worldMatrix);
-
-	output.normal = normalize(output.normal);
+	output.normal = normalize(mul(input.normal, (float3x3)worldMatrix));
 
 	return output;
 }
@@ -59,8 +57,8 @@ float4 LightPixelShader(PixelInputType input) : SV_TARGET
 	textureColor = shaderTexture.Sample(SampleType, input.tex);
 
 	lightDir = -lightDirection;
-	lightIntensity = saturate(dot(input.normal, lightDir));
-
+	lightIntensity = saturate(dot(input.normal, normalize(lightDir)));
+	
 	color = saturate(diffuseColor * lightIntensity);
 
 	color = textureColor * color;

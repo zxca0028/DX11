@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Common/Define.h"
+#include "Global/Define.h"
 
 namespace CLIENT
 {

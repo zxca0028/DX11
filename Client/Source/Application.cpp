@@ -8,8 +8,6 @@
 #include "GameObject/GameObjectMgr.h"
 #include "ClientUI/ClientUI.h"
 
-
-
 namespace CLIENT
 {
     HINSTANCE ghInst;
@@ -66,6 +64,7 @@ namespace CLIENT
 
     void CLIENT::Application::Destroy()
     {
+
         GlobalInstance::Instance<ClientUI>()->Shutdown();
         GlobalInstance::Release();
     }

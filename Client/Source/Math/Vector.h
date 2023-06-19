@@ -6,7 +6,7 @@ namespace CLIENT
 {
 	class vector2 final
 	{
-	private:
+	public:
 		float x, y;
 	public:
 		vector2() : x(0), y(0) {}

@@ -5,6 +5,8 @@
 #include "Global/Pipeline.h"
 #include "GameObject/Camera/Camera.h"
 
+#include "Input/Input.h"
+
 #include "Component/Geometry/Rect.h"
 #include "Component/Geometry/Cube.h"
 #include "Component/Texture/Texture.h"
@@ -19,8 +21,8 @@ namespace CLIENT
 	{
 		mInitDesc = *desc;
 
-		mRect = Rect::Create();
-		//mCube = Cube::Create();
+		//mRect = Rect::Create();
+		mCube = Cube::Create();
 
 		Component::COMPONENT_INIT_DESC textureInitDesc;
 		{
@@ -48,21 +50,30 @@ namespace CLIENT
 
 	void CLIENT::TestObj::Update()
 	{
+		//if (GlobalInstance::Instance<Input>()->KeyInput(DIK_RIGHTARROW))
+		//{
+		//	mTransform->RotationAxis(vector3(0.f, 1.f, 0.f), 0.001f);
+		//}
+
+		mTransform->RotationAxis(vector3(1.f, 0.f, 0.f), 0.0001f);
+		mTransform->RotationAxis(vector3(0.f, 1.f, 0.f), 0.0001f);
+		//mTransform->RotationAxis(vector3(0.f, 0.f, 1.f), 0.0001f);
+
 	}
 
 	void CLIENT::TestObj::Render()
 	{
 		auto context    = GlobalInstance::Instance<D3D>()->GetDeviceContext();
-		auto indexCount = mRect->GetIndexCount();
-		//auto indexCount = mCube->GetIndexCount();
+		//auto indexCount = mRect->GetIndexCount();
+		auto indexCount = mCube->GetIndexCount();
 		auto srv        = mTexture->GetTexture();
 
 		matrix worldMatrix = mTransform->GetWorldMatrix();
 		matrix projMatrix  = GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::PROJ);
 		matrix viewMatrix  = GlobalInstance::Instance<Pipeline>()->GetMatrix(Pipeline::STATE::VIEW);
 
-		mRect->Render();
-		//mCube->Render();
+		//mRect->Render();
+		mCube->Render();
 		mShader->Render(context, indexCount, worldMatrix, viewMatrix, projMatrix, srv);
 	}
 

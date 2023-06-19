@@ -179,7 +179,6 @@
     <ClInclude Include="..\..\PlugIn\DirectXTex\DirectXTex.h" />
     <ClInclude Include="..\Source\Application.h" />
     <ClInclude Include="..\Source\ClientUI\ClientUI.h" />
-    <ClInclude Include="..\Source\Common\Define.h" />
     <ClInclude Include="..\Source\Component\Component.h" />
     <ClInclude Include="..\Source\Component\Geometry\Cube.h" />
     <ClInclude Include="..\Source\Component\Geometry\Geometry.h" />
@@ -198,6 +197,7 @@
     <ClInclude Include="..\Source\GameObject\GameObject.h" />
     <ClInclude Include="..\Source\GameObject\GameObjectMgr.h" />
     <ClInclude Include="..\Source\GameObject\TestObject\TestObj.h" />
+    <ClInclude Include="..\Source\Global\Define.h" />
     <ClInclude Include="..\Source\Global\Exception.h" />
     <ClInclude Include="..\Source\Global\GlobalInstance.h" />
     <ClInclude Include="..\Source\Global\Log.h" />

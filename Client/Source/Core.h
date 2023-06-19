@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Common/Define.h"
-
+#include "Global/Define.h"
 #include "DirectXTex/DirectXTex.h"
 
 #include "fbxSDK/fbxsdk.h"

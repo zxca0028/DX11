@@ -18,8 +18,8 @@ namespace CLIENT
 		GameObject::OBJECT_INIT_DESC obj_1_InitDesc;
 		{
 			//obj_1_InitDesc.texture = L"stone01.tga";
-			//obj_1_InitDesc.texture = L"seafloor.dds";
-			obj_1_InitDesc.texture  = L"grass.jpeg";
+			obj_1_InitDesc.texture = L"Test.dds";
+			//obj_1_InitDesc.texture  = L"grass.jpeg";
 			//obj_1_InitDesc.shader = L"Color.hlsl";
 			obj_1_InitDesc.shader   = L"Light.hlsl";
 			obj_1_InitDesc.position = vector3(0.0f, 0.0f, 0.0f);

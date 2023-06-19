@@ -5,9 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Common">
-      <UniqueIdentifier>{43b75ebd-8bdd-4e19-8a85-80c567ae68a2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Window">
       <UniqueIdentifier>{96fdf935-0e4c-401d-aa0e-2484675f9e2b}</UniqueIdentifier>
     </Filter>
@@ -59,9 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\main.cpp" />
-    <ClCompile Include="..\Source\pch.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Global\GlobalInstance.cpp">
       <Filter>Global</Filter>
     </ClCompile>
@@ -132,14 +126,11 @@
     <ClCompile Include="..\Source\Component\Geometry\Cube.cpp">
       <Filter>Component\Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\pch.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Source\Common\Define.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Source\pch.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="..\Source\Core.h">
       <Filter>Global</Filter>
     </ClInclude>
@@ -227,6 +218,12 @@
     </ClInclude>
     <ClInclude Include="..\Source\Component\Geometry\Cube.h">
       <Filter>Component\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\pch.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Source\Global\Define.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
